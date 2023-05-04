@@ -36,19 +36,23 @@ object AuthRequests extends BaseRequest {
       .get(authWizUrl)
       .check(status.is(200))
 
-  lazy val navigateToAuthSession: HttpRequestBuilder =
-    http("Navigate to Auth Session page")
-      .get(authSession)
-      .check(status.is(200))
-      .check(saveBearerTokenFromBody())
-
   def createAuthSession(utr: String = "0000000022"): HttpRequestBuilder =
     http("Create Auth Session")
       .post(authWizUrl)
       .formParam("redirectionUrl", authSession)
+      .formParam("credentialStrength", "strong")
+      .formParam("authorityId", "")
+      .formParam("confidenceLevel", "50")
+      .formParam("affinityGroup", "Individual")
       .formParam("enrolment[0].name", "IR-CT")
       .formParam("enrolment[0].taxIdentifier[0].name", "UTR")
       .formParam("enrolment[0].taxIdentifier[0].value", utr)
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(303))
+
+  lazy val navigateToAuthSession: HttpRequestBuilder =
+    http("Navigate to Auth Session page")
+      .get(authSession)
+      .check(status.is(200))
+      .check(saveBearerTokenFromBody())
 }

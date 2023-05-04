@@ -25,8 +25,8 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait BaseRequest extends ServicesConfiguration {
 
-  val vatReturnsBaseUrl: String = baseUrlFor("vat-returns")
-  val submitVatReturnBaseUrl: String = baseUrlFor("submit-vat-return-frontend")
+  val SDILReturnsBaseUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
+  val submitVatReturnBaseUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
 
   val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)""""
 
