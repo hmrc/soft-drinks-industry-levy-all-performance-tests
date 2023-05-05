@@ -26,10 +26,23 @@ class SDILSimulation extends PerformanceTestRunner {
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
-    postHowManyOwnBrandsPackagedAtOwnSitesPage
+    postHowManyOwnBrandsPackagedAtOwnSitesPage,
+    getPackagedAsContractPackerPage,
+    postPackagedAsContractPackerPage,
+    getHowManyPackagedAsContractPackerPage,
+    postHowManyPackagedAsContractPackerPage,
+    getExemptionsForSmallProducersPage,
+    postExemptionsForSmallProducersPage,
+    getAddSmallProducerPage,
+    postAddSmallProducerPage,
+    getSmallProducerDetailsPage,
+    postSmallProducerDetailsPage
+
+
   )
 
   runSimulation()
