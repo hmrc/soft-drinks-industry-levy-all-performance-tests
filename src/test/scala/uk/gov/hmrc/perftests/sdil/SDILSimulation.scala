@@ -17,8 +17,8 @@
 package uk.gov.hmrc.perftests.sdil
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.sdil.SDILRequests._
 import uk.gov.hmrc.perftests.sdil.AuthRequests._
+import uk.gov.hmrc.perftests.sdil.SDILRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
 
@@ -40,9 +40,26 @@ class SDILSimulation extends PerformanceTestRunner {
     getAddSmallProducerPage,
     postAddSmallProducerPage,
     getSmallProducerDetailsPage,
-    postSmallProducerDetailsPage
-
-
+    postSmallProducerDetailsPage,
+    getBroughtIntoUKPage,
+    postBroughtIntoUKPage,
+    getHowManyBroughtIntoUKPage,
+    postHowManyBroughtIntoUKPage,
+    getBroughtIntoUKFromSmallProducersPage,
+    postBroughtIntoUKFromSmallProducersPage,
+    getHowManyBroughtIntoUKFromSmallProducersPage,
+    postHowManyBroughtIntoUKFromSmallProducersPage,
+    getClaimCreditsForExportsPage,
+    postClaimCreditsForExportsPage,
+    getHowManyCreditsForExportsPage,
+    postHowManyCreditsForExportsPage,
+    getClaimCreditsForLostDamagedPage,
+    postClaimCreditsForLostDamagedPage,
+    getHowManyCreditsForLostDamagedPage,
+    postHowManyCreditsForLostDamagedPage,
+    getCheckYourAnswersPage,
+    postCheckYourAnswersPage,
+    getReturnSentPage
   )
 
   runSimulation()

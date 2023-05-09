@@ -144,4 +144,157 @@ object SDILRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$route/brought-into-uk": String))
   }
 
+  def getBroughtIntoUKPage: HttpRequestBuilder = {
+    http("GET brought-into-uk")
+      .get(s"$baseUrl/$route/brought-into-uk": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postBroughtIntoUKPage: HttpRequestBuilder = {
+    http("POST brought-into-uk")
+      .post(s"$baseUrl/$route/brought-into-uk": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", "true")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/how-many-brought-into-uk": String))
+  }
+
+  def getHowManyBroughtIntoUKPage: HttpRequestBuilder = {
+    http("GET how-many-brought-into-uk")
+      .get(s"$baseUrl/$route/how-many-brought-into-uk": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postHowManyBroughtIntoUKPage: HttpRequestBuilder = {
+    http("POST how-many-brought-into-uk")
+      .post(s"$baseUrl/$route/how-many-brought-into-uk": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("lowBand", "100")
+      .formParam("highBand", "100")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/brought-into-uk-from-small-producers": String))
+  }
+
+  def getBroughtIntoUKFromSmallProducersPage: HttpRequestBuilder = {
+    http("GET brought-into-uk-from-small-producers")
+      .get(s"$baseUrl/$route/brought-into-uk-from-small-producers": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postBroughtIntoUKFromSmallProducersPage: HttpRequestBuilder = {
+    http("POST brought-into-uk-from-small-producers")
+      .post(s"$baseUrl/$route/brought-into-uk-from-small-producers": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", "true")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/how-many-into-uk-small-producers": String))
+  }
+
+  def getHowManyBroughtIntoUKFromSmallProducersPage: HttpRequestBuilder = {
+    http("GET how-many-into-uk-small-producers")
+      .get(s"$baseUrl/$route/how-many-into-uk-small-producers": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postHowManyBroughtIntoUKFromSmallProducersPage: HttpRequestBuilder = {
+    http("POST how-many-into-uk-small-producers")
+      .post(s"$baseUrl/$route/how-many-into-uk-small-producers": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("lowBand", "100")
+      .formParam("highBand", "100")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/claim-credits-for-exports": String))
+  }
+
+  def getClaimCreditsForExportsPage: HttpRequestBuilder = {
+    http("GET claim-credits-for-exports")
+      .get(s"$baseUrl/$route/claim-credits-for-exports": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postClaimCreditsForExportsPage: HttpRequestBuilder = {
+    http("POST claim-credits-for-exports")
+      .post(s"$baseUrl/$route/claim-credits-for-exports": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", "true")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/how-many-credits-for-exports": String))
+  }
+
+  def getHowManyCreditsForExportsPage: HttpRequestBuilder = {
+    http("GET how-many-into-uk-small-producers")
+      .get(s"$baseUrl/$route/how-many-credits-for-exports": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postHowManyCreditsForExportsPage: HttpRequestBuilder = {
+    http("POST how-many-credits-for-exports")
+      .post(s"$baseUrl/$route/how-many-credits-for-exports": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("lowBand", "100")
+      .formParam("highBand", "100")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/claim-credits-for-lost-damaged": String))
+  }
+
+  def getClaimCreditsForLostDamagedPage: HttpRequestBuilder = {
+    http("GET claim-credits-for-lost-damaged")
+      .get(s"$baseUrl/$route/claim-credits-for-lost-damaged": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postClaimCreditsForLostDamagedPage: HttpRequestBuilder = {
+    http("POST claim-credits-for-lost-damaged")
+      .post(s"$baseUrl/$route/claim-credits-for-lost-damaged": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("value", "true")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/how-many-credits-for-lost-damaged": String))
+  }
+
+  def getHowManyCreditsForLostDamagedPage: HttpRequestBuilder = {
+    http("GET how-many-credits-for-lost-damaged")
+      .get(s"$baseUrl/$route/how-many-credits-for-lost-damaged": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postHowManyCreditsForLostDamagedPage: HttpRequestBuilder = {
+    http("POST how-many-credits-for-lost-damaged")
+      .post(s"$baseUrl/$route/how-many-credits-for-lost-damaged": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .formParam("lowBand", "100")
+      .formParam("highBand", "100")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/check-your-answers": String))
+  }
+
+  def getCheckYourAnswersPage: HttpRequestBuilder = {
+    http("GET check-your-answers")
+      .get(s"$baseUrl/$route/check-your-answers": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postCheckYourAnswersPage: HttpRequestBuilder = {
+    http("POST check-your-answers")
+      .post(s"$baseUrl/$route/check-your-answers": String)
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$route/return-sent": String))
+  }
+
+  def getReturnSentPage: HttpRequestBuilder = {
+    http("GET return-sent")
+      .get(s"$baseUrl/$route/return-sent": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
 }
