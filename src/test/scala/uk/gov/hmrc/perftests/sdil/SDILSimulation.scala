@@ -58,7 +58,6 @@ class SDILSimulation extends PerformanceTestRunner {
     getHowManyCreditsForLostDamagedPage,
     postHowManyCreditsForLostDamagedPage,
     getCheckYourAnswersPage,
-    postCheckYourAnswersPage,
     getReturnSentPage
   )
 

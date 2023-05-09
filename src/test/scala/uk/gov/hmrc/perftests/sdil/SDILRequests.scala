@@ -283,14 +283,6 @@ object SDILRequests extends ServicesConfiguration {
       .check(status.is(200))
   }
 
-  def postCheckYourAnswersPage: HttpRequestBuilder = {
-    http("POST check-your-answers")
-      .post(s"$baseUrl/$route/check-your-answers": String)
-      .formParam("csrfToken", "${csrfToken}")
-      .check(status.is(303))
-      .check(header("Location").is(s"/$route/return-sent": String))
-  }
-
   def getReturnSentPage: HttpRequestBuilder = {
     http("GET return-sent")
       .get(s"$baseUrl/$route/return-sent": String)
