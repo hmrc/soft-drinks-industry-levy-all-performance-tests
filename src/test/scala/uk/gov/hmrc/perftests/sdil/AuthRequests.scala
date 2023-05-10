@@ -26,8 +26,9 @@ object AuthRequests extends BaseRequest {
 
   val authWizUrl: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/gg-sign-in"
   val authSession: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/session"
-  val bearerTokenPattern = """<td data-session-id="authToken" style="word-break: break-all">
-                             |            <code style="border: none">([^"]+)</code>""".stripMargin
+  val bearerTokenPattern =
+    """<td data-session-id="authToken" style="word-break: break-all">
+      |            <code style="border: none">([^"]+)</code>""".stripMargin
 
   def saveBearerTokenFromBody(): CheckBuilder[RegexCheckType, String, String] = regex(_ => bearerTokenPattern).saveAs("bearerToken")
 

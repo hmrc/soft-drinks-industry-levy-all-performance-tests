@@ -19,10 +19,16 @@ package uk.gov.hmrc.perftests.sdil
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.sdil.AuthRequests._
 import uk.gov.hmrc.perftests.sdil.SDILRequests._
+import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
 
   setup("sdil-returns-journey", "SDIL Returns journey").withRequests(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
