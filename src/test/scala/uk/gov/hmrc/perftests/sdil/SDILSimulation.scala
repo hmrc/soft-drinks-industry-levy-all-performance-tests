@@ -28,6 +28,7 @@ class SDILSimulation extends PerformanceTestRunner {
     resetReturns,
     resetRegistrations,
     sdilReturnsCollectionReset,
+    resetUserAnswers(),
 
     navigateToAuth,
     createAuthSession(),

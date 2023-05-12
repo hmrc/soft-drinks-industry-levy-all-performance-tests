@@ -24,13 +24,15 @@ object SetupRequests extends BaseRequest {
 
   val baseBackendUrl: String = baseUrlFor("soft-drinks-industry-levy")
   val backendRoute: String = "soft-drinks-industry-levy/test-only"
+  val baseFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
+  val frontEndRoute: String = "soft-drinks-industry-levy-returns-frontend"
 
   def resetAll: HttpRequestBuilder = {
     resetPending
     resetReturns
     resetRegistrations
     sdilReturnsCollectionReset
-//    resetUserAnswers
+    resetUserAnswers()
   }
 
   def resetPending: HttpRequestBuilder = {
@@ -53,9 +55,9 @@ object SetupRequests extends BaseRequest {
       .get(s"$baseBackendUrl/$backendRoute/sdilReturnsCollectionReset": String)
   }
 
-//  def resetUserAnswers: HttpRequestBuilder = {
-//    http("GET user-answers")
-//      .get(s"This does not exist yet, but is required to complete the perf tests": String)
-//  }
+  def resetUserAnswers(sdilRef: String = "XGSDIL000000437"): HttpRequestBuilder = {
+    http(s"DELETE user-answers $sdilRef")
+      .get(s"$baseFrontEndUrl/$frontEndRoute/test-only/user-answers/$sdilRef": String)
+  }
 
 }

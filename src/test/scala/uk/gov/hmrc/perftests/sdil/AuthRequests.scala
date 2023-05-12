@@ -37,7 +37,7 @@ object AuthRequests extends BaseRequest {
       .get(authWizUrl)
       .check(status.is(200))
 
-  def createAuthSession(utr: String = "0000000022"): HttpRequestBuilder =
+  def createAuthSession(utr: String = "0000000437"): HttpRequestBuilder =
     http("Create Auth Session")
       .post(authWizUrl)
       .formParam("redirectionUrl", authSession)
