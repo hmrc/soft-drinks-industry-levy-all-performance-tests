@@ -56,7 +56,7 @@ object SetupRequests extends BaseRequest {
   }
 
   def resetUserAnswers(sdilRef: String = "XGSDIL000000437"): HttpRequestBuilder = {
-    http(s"DELETE user-answers $sdilRef")
+    http(s"GET user-answers $sdilRef")
       .get(s"$baseFrontEndUrl/$frontEndRoute/test-only/user-answers/$sdilRef": String)
   }
 
