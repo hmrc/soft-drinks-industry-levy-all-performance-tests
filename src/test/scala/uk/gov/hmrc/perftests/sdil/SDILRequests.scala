@@ -31,7 +31,7 @@ object SDILRequests extends ServicesConfiguration {
     http("GET own-brands-packaged-at-own-sites")
       .get(s"$baseFrontEndUrl/$frontEndRoute/own-brands-packaged-at-own-sites": String)
       .check(saveCsrfToken())
-      .check(status.is(200))
+      .check(status.is(303))
   }
 
   def postOwnBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
