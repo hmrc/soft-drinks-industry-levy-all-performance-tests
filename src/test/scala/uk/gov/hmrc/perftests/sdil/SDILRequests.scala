@@ -27,17 +27,24 @@ object SDILRequests extends ServicesConfiguration {
   val baseFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val frontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
 
+  def getToReturns: HttpRequestBuilder = {
+    http("GET to returns first page")
+      .get(s"$baseFrontEndUrl/$frontEndRoute/submit-return/year/2018/quarter/1/nil-return/false": String)
+      .check(status.is(303))
+      .check(header("Location").is(s"/$frontEndRoute/own-brands-packaged-at-own-sites": String))
+  }
+
   def getOwnBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
     http("GET own-brands-packaged-at-own-sites")
       .get(s"$baseFrontEndUrl/$frontEndRoute/own-brands-packaged-at-own-sites": String)
+      .check(status.is(200))
       .check(saveCsrfToken())
-      .check(status.is(303))
   }
 
   def postOwnBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
     http("POST own-brands-packaged-at-own-sites")
       .post(s"$baseFrontEndUrl/$frontEndRoute/own-brands-packaged-at-own-sites": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/how-many-own-brands-packaged-at-own-sites": String))
@@ -53,7 +60,7 @@ object SDILRequests extends ServicesConfiguration {
   def postHowManyOwnBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
     http("POST how-many-own-brands-packaged-at-own-sites")
       .post(s"$baseFrontEndUrl/$frontEndRoute/how-many-own-brands-packaged-at-own-sites": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))
@@ -70,7 +77,7 @@ object SDILRequests extends ServicesConfiguration {
   def postPackagedAsContractPackerPage: HttpRequestBuilder = {
     http("POST packaged-as-contract-packer")
       .post(s"$baseFrontEndUrl/$frontEndRoute/packaged-as-contract-packer": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/how-many-packaged-as-contract-packer": String))
@@ -86,7 +93,7 @@ object SDILRequests extends ServicesConfiguration {
   def postHowManyPackagedAsContractPackerPage: HttpRequestBuilder = {
     http("POST how-many-packaged-as-contract-packer")
       .post(s"$baseFrontEndUrl/$frontEndRoute/how-many-packaged-as-contract-packer": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))
@@ -103,7 +110,7 @@ object SDILRequests extends ServicesConfiguration {
   def postExemptionsForSmallProducersPage: HttpRequestBuilder = {
     http("POST exemptions-for-small-producers")
       .post(s"$baseFrontEndUrl/$frontEndRoute/exemptions-for-small-producers": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/add-small-producer": String))
@@ -119,7 +126,7 @@ object SDILRequests extends ServicesConfiguration {
   def postAddSmallProducerPage: HttpRequestBuilder = {
     http("POST add-small-producer")
       .post(s"$baseFrontEndUrl/$frontEndRoute/add-small-producer": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("producerName", "Fake Producer")
       .formParam("referenceNumber", "XGSDIL000001611")
       .formParam("lowBand", "1000")
@@ -138,7 +145,7 @@ object SDILRequests extends ServicesConfiguration {
   def postSmallProducerDetailsPage: HttpRequestBuilder = {
     http("POST small-producer-details")
       .post(s"$baseFrontEndUrl/$frontEndRoute/small-producer-details": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "false")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/brought-into-uk": String))
@@ -154,7 +161,7 @@ object SDILRequests extends ServicesConfiguration {
   def postBroughtIntoUKPage: HttpRequestBuilder = {
     http("POST brought-into-uk")
       .post(s"$baseFrontEndUrl/$frontEndRoute/brought-into-uk": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/how-many-brought-into-uk": String))
@@ -170,7 +177,7 @@ object SDILRequests extends ServicesConfiguration {
   def postHowManyBroughtIntoUKPage: HttpRequestBuilder = {
     http("POST how-many-brought-into-uk")
       .post(s"$baseFrontEndUrl/$frontEndRoute/how-many-brought-into-uk": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))
@@ -187,7 +194,7 @@ object SDILRequests extends ServicesConfiguration {
   def postBroughtIntoUKFromSmallProducersPage: HttpRequestBuilder = {
     http("POST brought-into-uk-from-small-producers")
       .post(s"$baseFrontEndUrl/$frontEndRoute/brought-into-uk-from-small-producers": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/how-many-into-uk-small-producers": String))
@@ -203,7 +210,7 @@ object SDILRequests extends ServicesConfiguration {
   def postHowManyBroughtIntoUKFromSmallProducersPage: HttpRequestBuilder = {
     http("POST how-many-into-uk-small-producers")
       .post(s"$baseFrontEndUrl/$frontEndRoute/how-many-into-uk-small-producers": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))
@@ -220,7 +227,7 @@ object SDILRequests extends ServicesConfiguration {
   def postClaimCreditsForExportsPage: HttpRequestBuilder = {
     http("POST claim-credits-for-exports")
       .post(s"$baseFrontEndUrl/$frontEndRoute/claim-credits-for-exports": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/how-many-credits-for-exports": String))
@@ -236,7 +243,7 @@ object SDILRequests extends ServicesConfiguration {
   def postHowManyCreditsForExportsPage: HttpRequestBuilder = {
     http("POST how-many-credits-for-exports")
       .post(s"$baseFrontEndUrl/$frontEndRoute/how-many-credits-for-exports": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))
@@ -253,7 +260,7 @@ object SDILRequests extends ServicesConfiguration {
   def postClaimCreditsForLostDamagedPage: HttpRequestBuilder = {
     http("POST claim-credits-for-lost-damaged")
       .post(s"$baseFrontEndUrl/$frontEndRoute/claim-credits-for-lost-damaged": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/how-many-credits-for-lost-damaged": String))
@@ -269,7 +276,7 @@ object SDILRequests extends ServicesConfiguration {
   def postHowManyCreditsForLostDamagedPage: HttpRequestBuilder = {
     http("POST how-many-credits-for-lost-damaged")
       .post(s"$baseFrontEndUrl/$frontEndRoute/how-many-credits-for-lost-damaged": String)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", s"$${csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))

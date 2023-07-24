@@ -34,6 +34,7 @@ class SDILSimulation extends PerformanceTestRunner {
     createAuthSession(),
     navigateToAuthSession,
 
+    getToReturns,
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
