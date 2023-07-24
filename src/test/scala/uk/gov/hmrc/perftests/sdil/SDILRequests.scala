@@ -128,7 +128,7 @@ object SDILRequests extends ServicesConfiguration {
       .post(s"$baseFrontEndUrl/$frontEndRoute/add-small-producer": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("producerName", "Fake Producer")
-      .formParam("referenceNumber", "XGSDIL000001611")
+      .formParam("referenceNumber", "XZSDIL000000234")
       .formParam("lowBand", "1000")
       .formParam("highBand", "1000")
       .check(status.is(303))
