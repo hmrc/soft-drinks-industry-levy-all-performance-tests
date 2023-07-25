@@ -169,9 +169,32 @@ class SDILSimulation extends PerformanceTestRunner {
     createAuthSession(),
     navigateToAuthSession,
     getPage("select-change"),
-    postPage("select-change", "updateRegisteredDetails"),
+    postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
+    getPage ("change-activity/amount-produced"),
+    postPage("change-activity/amount-produced", "large", "/change-activity/operate-packaging-site")
   )
 
+  setup("variations-change-activity-less-than-one-million", "less than 1 million").withRequests(
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+    getPage("select-change"),
+    postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
+    getPage("change-activity/amount-produced"),
+    postPage("change-activity/amount-produced", "small", "/change-activity/third-party-packagers")
+  )
+
+  setup("variations-change-activity-none-produced", "none produced").withRequests(
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+    getPage("select-change"),
+    postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
+    getPage("change-activity/amount-produced"),
+    postPage("change-activity/amount-produced", "none", "/change-activity/contract-packing")
+  )
   runSimulation()
 
 }
