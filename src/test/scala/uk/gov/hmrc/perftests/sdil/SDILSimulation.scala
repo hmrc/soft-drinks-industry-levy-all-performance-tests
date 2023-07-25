@@ -19,7 +19,7 @@ package uk.gov.hmrc.perftests.sdil
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.sdil.AuthRequests._
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
-import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postContactDetailsAddPage, postPage}
+import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postContactDetailsAddPage, postFormlessPage, postPage}
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
@@ -80,12 +80,26 @@ class SDILSimulation extends PerformanceTestRunner {
 
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails"),
+//    getPage("what do you need to update"),
+//    postPage("what do you need to update", "add or remove packaging sites or warehouse addresses"),
     getPage("change-registered-details/packaging-site-details"),
     postPage("change-registered-details/packaging-site-details", "false"),
     getPage("change-registered-details/warehouse-details"),
     postPage("change-registered-details/warehouse-details", "false"),
+//    getPage("change-registered-details/contact-details"),
+//    postContactDetailsPage,
     getPage ("change-registered-details/contact-details-add"),
-    postContactDetailsAddPage
+    postContactDetailsAddPage,
+//    getPage("change-registered-details/business-address"),
+//    postBusinessAddressPage,
+//    getPage ("change-registered-details/business-address-add"),
+//    postBusinessAddressAddPage,
+    getPage("change-registered-details/check-your-answers"),
+    postFormlessPage("change-registered-details/check-your-answers"),
+    getPage ("change-registered-details/warehouse-details/remove/1"),
+    postPage("change-registered-details/warehouse-details/remove/1", "false"),
+    getPage ("change-registered-details/packaging-site-details/remove/1"),
+    postPage("change-registered-details/packaging-site-details/remove/1", "false")
   )
 
   runSimulation()

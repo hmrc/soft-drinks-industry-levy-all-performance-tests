@@ -34,6 +34,14 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(saveCsrfToken())
   }
 
+  def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
+    http(s"POST $url")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
+  }
+
   def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
