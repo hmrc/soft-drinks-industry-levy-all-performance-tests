@@ -18,7 +18,8 @@ package uk.gov.hmrc.perftests.sdil
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.sdil.AuthRequests._
-import uk.gov.hmrc.perftests.sdil.SDILRequests._
+import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
+import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postContactDetailsAddPage, postPage}
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
@@ -68,6 +69,23 @@ class SDILSimulation extends PerformanceTestRunner {
     getCheckYourAnswersPage,
     postCheckYourAnswersPage,
     getReturnSentPage
+  )
+
+  setup("sdil-variations-journey", "SDIL Variations journey").withRequests(
+
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+
+    getPage("select-change"),
+    postPage("select-change", "updateRegisteredDetails"),
+    getPage("change-registered-details/packaging-site-details"),
+    postPage("change-registered-details/packaging-site-details", "false"),
+    getPage("change-registered-details/warehouse-details"),
+    postPage("change-registered-details/warehouse-details", "false"),
+    getPage ("change-registered-details/contact-details-add"),
+    postContactDetailsAddPage
   )
 
   runSimulation()

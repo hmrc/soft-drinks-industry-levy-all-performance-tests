@@ -22,7 +22,7 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 import uk.gov.hmrc.perftests.sdil.AuthRequests.saveCsrfToken
 
-object SDILRequests extends ServicesConfiguration {
+object SDILReturnsRequests extends ServicesConfiguration {
 
   val baseFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val frontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
