@@ -51,6 +51,16 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
   }
 
+  def postLitresPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
+    http(s"POST $url")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("lowBand", "100")
+      .formParam("highBand", "100")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
+  }
+
   def postContactDetailsAddPage: HttpRequestBuilder = {
     http("POST change-registered-details/contact-details-add")
       .post(s"$baseFrontEndUrl/$frontEndRoute/change-registered-details/contact-details-add": String)

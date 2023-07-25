@@ -19,7 +19,7 @@ package uk.gov.hmrc.perftests.sdil
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.sdil.AuthRequests._
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
-import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postContactDetailsAddPage, postFormlessPage, postPage}
+import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postContactDetailsAddPage, postFormlessPage, postLitresPage, postPage}
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
@@ -171,7 +171,9 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("select-change"),
     postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
     getPage ("change-activity/amount-produced"),
-    postPage("change-activity/amount-produced", "large", "/change-activity/operate-packaging-site")
+    postPage("change-activity/amount-produced", "large", "/change-activity/operate-packaging-site"),
+    getPage("change-activity/how-many-own-brands-next-12-months"),
+    postLitresPage("change-activity/how-many-own-brands-next-12-months", "/change-activity/contract-packing")
   )
 
   setup("variations-change-activity-less-than-one-million", "less than 1 million").withRequests(
@@ -182,7 +184,9 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("select-change"),
     postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
     getPage("change-activity/amount-produced"),
-    postPage("change-activity/amount-produced", "small", "/change-activity/third-party-packagers")
+    postPage("change-activity/amount-produced", "small", "/change-activity/third-party-packagers"),
+    getPage("change-activity/third-party-packagers"),
+    postPage("change-activity/third-party-packagers", "true", "/change-activity/operate-packaging-site")
   )
 
   setup("variations-change-activity-none-produced", "none produced").withRequests(
