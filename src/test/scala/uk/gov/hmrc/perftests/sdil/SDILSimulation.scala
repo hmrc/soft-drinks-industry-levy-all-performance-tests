@@ -71,7 +71,7 @@ class SDILSimulation extends PerformanceTestRunner {
     getReturnSentPage
   )
 
-  setup("sdil-variations-journey-update-contact", "SDIL Variations journey - update contact").withRequests(
+  setup("variations-update-registered-details-update-contact", "update-contact").withRequests(
     resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
@@ -97,7 +97,7 @@ class SDILSimulation extends PerformanceTestRunner {
     //  getPage("change-registered-details/variation-done")
   )
 
-  setup("sdil-variations-journey-update-site", "Variations - update packaging site").withRequests(
+  setup("variations-update-registered-details-update-site", "update-packaging-site").withRequests(
     resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
@@ -131,7 +131,7 @@ class SDILSimulation extends PerformanceTestRunner {
     //  getPage("change-registered-details/variation-done")
   )
 
-  setup("sdil-variations-journey-remove-site", "Variations - remove site").withRequests(
+  setup("variations-update-registered-details-remove-site", "remove-site").withRequests(
     resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
@@ -161,6 +161,15 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-registered-details/check-your-answers"),
     postFormlessPage("change-registered-details/check-your-answers"),
     //  getPage("change-registered-details/variation-done")
+  )
+
+  setup("variations-change-activity-one-million-or-more", "1 million or more").withRequests(
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+    getPage("select-change"),
+    postPage("select-change", "updateRegisteredDetails"),
   )
 
   runSimulation()
