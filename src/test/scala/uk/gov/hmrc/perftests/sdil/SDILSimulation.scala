@@ -129,17 +129,39 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-registered-details/check-your-answers"),
     postFormlessPage("change-registered-details/check-your-answers"),
     //  getPage("change-registered-details/variation-done")
-
   )
 
-
-//  getPage("change-registered-details/warehouse-details/remove/1")
-//  ,
-//  postPage("change-registered-details/warehouse-details/remove/1", "false")
-//  ,
-//  getPage("change-registered-details/packaging-site-details/remove/1")
-//  ,
-//  postPage("change-registered-details/packaging-site-details/remove/1", "false")
+  setup("sdil-variations-journey-remove-site", "Variations - remove site").withRequests(
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+    getPage("select-change"),
+    postPage("select-change", "updateRegisteredDetails"),
+    //  getPage("what do you need to update"),
+    //  postPage("what do you need to update", "add or remove packaging sites or warehouse addresses"),
+    getPage("change-registered-details/packaging-site-details"),
+    postPage("change-registered-details/packaging-site-details", "true"),
+    // getPage("change-registered-details/packaging-site-details-add"),
+    // postPackagingSiteDetailsAdd,
+    getPage("change-registered-details/packaging-site-details"),
+    getPage("change-registered-details/packaging-site-details/remove/1"),
+    postPage("change-registered-details/packaging-site-details/remove/1", "true"),
+    getPage("change-registered-details/warehouse-details"),
+    getPage("change-registered-details/warehouse-details/remove/1"),
+    postPage("change-registered-details/warehouse-details/remove/1", "false"),
+    getPage("change-registered-details/warehouse-details"),
+    postPage("change-registered-details/warehouse-details", "false"),
+    getPage("change-registered-details/contact-details-add"),
+    postContactDetailsAddPage,
+    //  getPage("change-registered-details/business-address"),
+    //  postBusinessAddressPage,
+    //  getPage("change-registered-details/business-address-add"),
+    //  postBusinessAddressAddPage,
+    getPage("change-registered-details/check-your-answers"),
+    postFormlessPage("change-registered-details/check-your-answers"),
+    //  getPage("change-registered-details/variation-done")
+  )
 
   runSimulation()
 
