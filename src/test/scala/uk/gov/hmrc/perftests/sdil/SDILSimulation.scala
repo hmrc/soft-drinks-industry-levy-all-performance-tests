@@ -172,8 +172,18 @@ class SDILSimulation extends PerformanceTestRunner {
     postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
     getPage ("change-activity/amount-produced"),
     postPage("change-activity/amount-produced", "large", "/change-activity/operate-packaging-site"),
+    getPage("change-activity/operate-packaging-site"),
+    postPage("change-activity/operate-packaging-site", "true", "/change-activity/how-many-own-brands-next-12-months"),
     getPage("change-activity/how-many-own-brands-next-12-months"),
-    postLitresPage("change-activity/how-many-own-brands-next-12-months", "/change-activity/contract-packing")
+    postLitresPage("change-activity/how-many-own-brands-next-12-months", "/change-activity/contract-packing"),
+    getPage("change-activity/contract-packing"),
+    postPage("change-activity/contract-packing", "true", "/change-activity/how-many-contract-packing-next-12-months"),
+    getPage("change-activity/how-many-contract-packing-next-12-months"),
+    postLitresPage("change-activity/how-many-contract-packing-next-12-months", "/change-activity/imports"),
+    getPage("change-activity/imports"),
+    postPage("change-activity/imports", "true", "/change-activity/how-many-imports-next-12-months"),
+    getPage("change-activity/how-many-imports-next-12-months"),
+    postLitresPage("change-activity/how-many-imports-next-12-months", "/change-activity/packaging-site-details")
   )
 
   setup("variations-change-activity-less-than-one-million", "less than 1 million").withRequests(
@@ -186,7 +196,11 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-activity/amount-produced"),
     postPage("change-activity/amount-produced", "small", "/change-activity/third-party-packagers"),
     getPage("change-activity/third-party-packagers"),
-    postPage("change-activity/third-party-packagers", "true", "/change-activity/operate-packaging-site")
+    postPage("change-activity/third-party-packagers", "true", "/change-activity/operate-packaging-site"),
+    getPage("change-activity/operate-packaging-site"),
+    postPage("change-activity/operate-packaging-site", "true", "/change-activity/how-many-own-brands-next-12-months"),
+    getPage("change-activity/how-many-own-brands-next-12-months"),
+    postLitresPage("change-activity/how-many-own-brands-next-12-months", "/change-activity/contract-packing")
   )
 
   setup("variations-change-activity-none-produced", "none produced").withRequests(
