@@ -33,7 +33,8 @@ Do **NOT** run a full performance test against staging from your local machine. 
 Run smoke test (locally) as follows:
 
 ```bash
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations gatling:test
 ```
 
 Run full performance test (locally) as follows:
