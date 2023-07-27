@@ -258,7 +258,6 @@ class SDILSimulation extends PerformanceTestRunner {
 //    getPage("/correct-return/select"), //TODO - find a utr that has a return to correct or set one up
 //    postSelectPeriodPage,
 
-
     getPage("correct-return/own-brands-packaged-at-own-sites"),
     postPage("correct-return/own-brands-packaged-at-own-sites", "true", "/correct-return/how-many-own-brands-packaged-at-own-sites"),
     getPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
@@ -275,32 +274,37 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("correct-return/small-producer-details"),
     postPage("correct-return/small-producer-details", "false"),
 
-//
-//    getBroughtIntoUKPage,
-//    postBroughtIntoUKPage,
-//    getHowManyBroughtIntoUKPage,
-//    postHowManyBroughtIntoUKPage,
-//    getBroughtIntoUKFromSmallProducersPage,
-//    postBroughtIntoUKFromSmallProducersPage,
-//    getHowManyBroughtIntoUKFromSmallProducersPage,
-//    postHowManyBroughtIntoUKFromSmallProducersPage,
-//    getClaimCreditsForExportsPage,
-//    postClaimCreditsForExportsPage,
-//    getHowManyCreditsForExportsPage,
-//    postHowManyCreditsForExportsPage,
-//    getClaimCreditsForLostDamagedPage,
-//    postClaimCreditsForLostDamagedPage,
-//    getHowManyCreditsForLostDamagedPage,
-//    postHowManyCreditsForLostDamagedPage,
-//    getCheckYourAnswersPage,
-//    postCheckYourAnswersPage,
-//    getReturnSentPage
+    getPage("correct-return/brought-into-uk"),
+    postPage("correct-return/brought-into-uk", "true", "/correct-return/how-many-brought-into-uk"),
+    getPage("correct-return/how-many-brought-into-uk"),
+    postLitresPage("correct-return/how-many-brought-into-uk"),
+
+    getPage("correct-return/brought-into-uk-from-small-producers"),
+    postPage("correct-return/brought-into-uk-from-small-producers", "true", "/correct-return/how-many-into-uk-small-producers"),
+    getPage("correct-return/how-many-into-uk-small-producers"),
+    postLitresPage("correct-return/how-many-into-uk-small-producers"),
+
+//    getPage("correct-return/claim-credits-for-exports"), TODO - complete after pages have been implemented
+//    postPage("correct-return/claim-credits-for-exports", "true", "/correct-return/how-many-credits-for-exports"),
+//    getPage("correct-return/how-many-credits-for-exports"),
+//    postLitresPage("correct-return/how-many-credits-for-exports"),
+
+    getPage("correct-return/claim-credits-for-lost-damaged"),
+    postPage("correct-return/claim-credits-for-lost-damaged", "true", "/correct-return/how-many-credits-for-lost-damaged"),
+    getPage("correct-return/how-many-credits-for-lost-damaged"),
+    postLitresPage("correct-return/how-many-credits-for-lost-damaged"),
+
+    getPage("correct-return/check-your-answers"),
+//    postFormlessPage("correct-return/check-your-answers"), TODO - complete after pages have been implemented
 
     getPage("correct-return/correction-reason"),
     postPage("correct-return/correction-reason", "some reason"),
     getPage("correct-return/repayment-method"),
     postPage("correct-return/repayment-method", "bankAccount"),
-    getPage("correct-return//check-your-answers")
+    getPage("correct-return//check-your-answers"),
+
+    getPage("correct-return/check-your-answers"),
+    //    postFormlessPage("correct-return/check-your-answers"), TODO - complete after pages have been implemented
   )
 
   runSimulation()
