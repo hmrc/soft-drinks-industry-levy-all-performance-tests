@@ -248,6 +248,27 @@ class SDILSimulation extends PerformanceTestRunner {
     // postFormlessPage("cancel-registration/check-your-answers") TODO - when CYA page developed
   )
 
+  setup("variations-correct-return", "correct return").withRequests(
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+    getPage("select-change"),
+    postPage("select-change", "correctReturn"),
+//    getPage("/correct-return/select"), //TODO - find a utr that has a return to correct or set one up
+//    postSelectPeriodPage,
+
+
+
+
+
+    getPage("/correct-return/correction-reason"),
+    postPage("/correct-return/correction-reason", "some reason"),
+    getPage("/correct-return/repayment-method"),
+    postPage("/correct-return/repayment-method", "bankAccount"),
+    getPage("/correct-return//check-your-answers")
+  )
+
   runSimulation()
 
 }
