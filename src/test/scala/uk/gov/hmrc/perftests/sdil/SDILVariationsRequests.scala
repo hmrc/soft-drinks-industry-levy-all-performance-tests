@@ -22,6 +22,8 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 import uk.gov.hmrc.perftests.sdil.AuthRequests.saveCsrfToken
 
+import java.time.LocalDate
+
 object SDILVariationsRequests extends ServicesConfiguration {
 
   val baseFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-variations-frontend")
@@ -72,4 +74,19 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute": String))
   }
+
+  def postCancelDatePage: HttpRequestBuilder = {
+    http("POST cancel-registration/date")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/cancel-registration/date": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("cancelRegistrationDate.day", (LocalDate.now().plusDays(2).getDayOfMonth).toString)
+      .formParam("cancelRegistrationDate.month", (LocalDate.now().plusDays(2).getMonthValue).toString)
+      .formParam("cancelRegistrationDate.year", (LocalDate.now().plusDays(2).getYear).toString)
+      .check(status.is(303))
+      .check(header("Location").is(s"/$frontEndRoute": String))
+  }
+
+
+
+
 }

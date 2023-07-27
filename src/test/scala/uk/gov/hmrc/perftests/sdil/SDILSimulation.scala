@@ -19,7 +19,7 @@ package uk.gov.hmrc.perftests.sdil
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.sdil.AuthRequests._
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
-import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postContactDetailsAddPage, postFormlessPage, postLitresPage, postPage}
+import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postCancelDatePage, postContactDetailsAddPage, postFormlessPage, postLitresPage, postPage}
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
@@ -175,7 +175,9 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-activity/packaging-site-details"),
     postPage("change-activity/packaging-site-details", "false", "/change-activity/secondary-warehouse-details"),
     getPage("change-activity/secondary-warehouse-details"),
-    postPage("change-activity/secondary-warehouse-details", "false")
+    postPage("change-activity/secondary-warehouse-details", "false"),
+    getPage ("change-activity/check-your-answers"),
+    postFormlessPage("change-activity/check-your-answers")
     // TODO - add return sent after page has been developed
   )
 
@@ -205,7 +207,9 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-activity/packaging-site-details"),
     postPage("change-activity/packaging-site-details", "false", "/change-activity/secondary-warehouse-details"),
     getPage("change-activity/secondary-warehouse-details"),
-    postPage("change-activity/secondary-warehouse-details", "false")
+    postPage("change-activity/secondary-warehouse-details", "false"),
+    getPage("change-activity/check-your-answers"),
+    postFormlessPage("change-activity/check-your-answers")
     // TODO - add return sent after page has been developed
   )
 
@@ -239,11 +243,10 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("/cancel-registration/reason"),
     postPage("/cancel-registration/reason", "some reason"),
     getPage("/cancel-registration/date"),
-//    postPage("/cancel-registration/date", "some reason"),
+    postCancelDatePage,
+    getPage("cancel-registration/check-your-answers"),
+    // postFormlessPage("cancel-registration/check-your-answers") TODO - when CYA page developed
   )
-//  file-return-before-deregistration
-
-
 
   runSimulation()
 
