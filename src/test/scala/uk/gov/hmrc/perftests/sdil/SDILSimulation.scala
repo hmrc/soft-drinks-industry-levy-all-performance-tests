@@ -90,8 +90,6 @@ class SDILSimulation extends PerformanceTestRunner {
     postContactDetailsAddPage,
     //  getPage("change-registered-details/business-address"),
     //  postBusinessAddressPage,
-    //  getPage("change-registered-details/business-address-add"),
-    //  postBusinessAddressAddPage,
     getPage("change-registered-details/check-your-answers"),
     postFormlessPage("change-registered-details/check-your-answers"),
     //  getPage("change-registered-details/variation-done")
@@ -108,14 +106,10 @@ class SDILSimulation extends PerformanceTestRunner {
     //  postPage("what do you need to update", "add or remove packaging sites or warehouse addresses"),
     getPage("change-registered-details/packaging-site-details"),
     postPage("change-registered-details/packaging-site-details", "true"),
-    // getPage("change-registered-details/packaging-site-details-add"),
-    // postPackagingSiteDetailsAdd,
     getPage("change-registered-details/packaging-site-details"),
     postPage("change-registered-details/packaging-site-details", "false"),
     getPage("change-registered-details/warehouse-details"),
     postPage("change-registered-details/warehouse-details", "true"),
-    // getPage("change-registered-details/warehouse-details-add"),
-    // postWarehouseDetailsAddPage,
     getPage("change-registered-details/warehouse-details"),
     postPage("change-registered-details/warehouse-details", "false"),
     //  getPage("change-registered-details/contact-details"),
@@ -124,8 +118,6 @@ class SDILSimulation extends PerformanceTestRunner {
     postContactDetailsAddPage,
     //  getPage("change-registered-details/business-address"),
     //  postBusinessAddressPage,
-    //  getPage("change-registered-details/business-address-add"),
-    //  postBusinessAddressAddPage,
     getPage("change-registered-details/check-your-answers"),
     postFormlessPage("change-registered-details/check-your-answers"),
     //  getPage("change-registered-details/variation-done")
@@ -142,8 +134,6 @@ class SDILSimulation extends PerformanceTestRunner {
     //  postPage("what do you need to update", "add or remove packaging sites or warehouse addresses"),
     getPage("change-registered-details/packaging-site-details"),
     postPage("change-registered-details/packaging-site-details", "true"),
-    // getPage("change-registered-details/packaging-site-details-add"),
-    // postPackagingSiteDetailsAdd,
     getPage("change-registered-details/packaging-site-details"),
     getPage("change-registered-details/packaging-site-details/remove/1"),
     postPage("change-registered-details/packaging-site-details/remove/1", "true"),
@@ -156,8 +146,6 @@ class SDILSimulation extends PerformanceTestRunner {
     postContactDetailsAddPage,
     //  getPage("change-registered-details/business-address"),
     //  postBusinessAddressPage,
-    //  getPage("change-registered-details/business-address-add"),
-    //  postBusinessAddressAddPage,
     getPage("change-registered-details/check-your-answers"),
     postFormlessPage("change-registered-details/check-your-answers"),
     //  getPage("change-registered-details/variation-done")
@@ -183,7 +171,12 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-activity/imports"),
     postPage("change-activity/imports", "true", "/change-activity/how-many-imports-next-12-months"),
     getPage("change-activity/how-many-imports-next-12-months"),
-    postLitresPage("change-activity/how-many-imports-next-12-months", "/change-activity/packaging-site-details")
+    postLitresPage("change-activity/how-many-imports-next-12-months", "/change-activity/packaging-site-details"),
+    getPage("change-activity/packaging-site-details"),
+    postPage("change-activity/packaging-site-details", "false", "/change-activity/secondary-warehouse-details"),
+    getPage("change-activity/secondary-warehouse-details"),
+    postPage("change-activity/secondary-warehouse-details", "false")
+    // TODO - add return sent after page has been developed
   )
 
   setup("variations-change-activity-less-than-one-million", "less than 1 million").withRequests(
@@ -200,7 +193,20 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("change-activity/operate-packaging-site"),
     postPage("change-activity/operate-packaging-site", "true", "/change-activity/how-many-own-brands-next-12-months"),
     getPage("change-activity/how-many-own-brands-next-12-months"),
-    postLitresPage("change-activity/how-many-own-brands-next-12-months", "/change-activity/contract-packing")
+    postLitresPage("change-activity/how-many-own-brands-next-12-months", "/change-activity/contract-packing"),
+    getPage("change-activity/contract-packing"),
+    postPage("change-activity/contract-packing", "true", "/change-activity/how-many-contract-packing-next-12-months"),
+    getPage("change-activity/how-many-contract-packing-next-12-months"),
+    postLitresPage("change-activity/how-many-contract-packing-next-12-months", "/change-activity/imports"),
+    getPage("change-activity/imports"),
+    postPage("change-activity/imports", "true", "/change-activity/how-many-imports-next-12-months"),
+    getPage("change-activity/how-many-imports-next-12-months"),
+    postLitresPage("change-activity/how-many-imports-next-12-months", ""), //TODO - complete when navigation for this page is completed
+    getPage("change-activity/packaging-site-details"),
+    postPage("change-activity/packaging-site-details", "false", "/change-activity/secondary-warehouse-details"),
+    getPage("change-activity/secondary-warehouse-details"),
+    postPage("change-activity/secondary-warehouse-details", "false")
+    // TODO - add return sent after page has been developed
   )
 
   setup("variations-change-activity-none-produced", "none produced").withRequests(
