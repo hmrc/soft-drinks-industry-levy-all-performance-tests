@@ -49,6 +49,14 @@ Run smoke test (staging) as follows:
 sbt -Dperftest.runSmokeTest=true -DrunLocal=false gatling:test
 ```
 
+Run tests using labels
+
+```bash
+> sbt -Dperftest.labels={label} test
+```
+
+labels are: all, returns, variations
+
 ## Scalafmt
 
 Check all project files are formatted as expected as follows:
