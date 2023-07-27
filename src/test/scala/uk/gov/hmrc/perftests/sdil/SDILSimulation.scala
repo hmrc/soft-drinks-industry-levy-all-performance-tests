@@ -228,6 +228,21 @@ class SDILSimulation extends PerformanceTestRunner {
     postLitresPage("change-activity/how-many-imports-next-12-months", "/change-activity/packaging-site-details"),
     getPage("change-activity/suggest-deregistration")
   )
+
+  setup("variations-cancel-registration", "cancel registration").withRequests(
+    resetUserAnswers(),
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+    getPage("select-change"),
+    postPage("select-change", "cancelRegistration"),
+    getPage("/cancel-registration/reason"),
+    postPage("/cancel-registration/reason", "some reason")
+  )
+//  file-return-before-deregistration
+
+
+
   runSimulation()
 
 }

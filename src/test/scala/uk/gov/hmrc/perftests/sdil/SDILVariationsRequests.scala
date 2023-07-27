@@ -72,5 +72,4 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute": String))
   }
-
 }
