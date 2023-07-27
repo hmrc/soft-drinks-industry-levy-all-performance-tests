@@ -259,14 +259,17 @@ class SDILSimulation extends PerformanceTestRunner {
 //    postSelectPeriodPage,
 
 
+    getPage("correct-return/own-brands-packaged-at-own-sites"),
+    postPage("correct-return/own-brands-packaged-at-own-sites", "true", "/correct-return/how-many-own-brands-packaged-at-own-sites"),
 
 
 
-    getPage("/correct-return/correction-reason"),
-    postPage("/correct-return/correction-reason", "some reason"),
-    getPage("/correct-return/repayment-method"),
-    postPage("/correct-return/repayment-method", "bankAccount"),
-    getPage("/correct-return//check-your-answers")
+
+    getPage("correct-return/correction-reason"),
+    postPage("correct-return/correction-reason", "some reason"),
+    getPage("correct-return/repayment-method"),
+    postPage("correct-return/repayment-method", "bankAccount"),
+    getPage("correct-return//check-your-answers")
   )
 
   runSimulation()
