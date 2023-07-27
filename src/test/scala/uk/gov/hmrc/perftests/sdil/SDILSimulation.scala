@@ -217,7 +217,16 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("select-change"),
     postPage("select-change", "changeActivity", "/change-activity/amount-produced"),
     getPage("change-activity/amount-produced"),
-    postPage("change-activity/amount-produced", "none", "/change-activity/contract-packing")
+    postPage("change-activity/amount-produced", "none", "/change-activity/contract-packing"),
+    getPage("change-activity/contract-packing"),
+    postPage("change-activity/contract-packing", "true", "/change-activity/how-many-contract-packing-next-12-months"),
+    getPage("change-activity/how-many-contract-packing-next-12-months"),
+    postLitresPage("change-activity/how-many-contract-packing-next-12-months", "/change-activity/imports"),
+    getPage("change-activity/imports"),
+    postPage("change-activity/imports", "true", "/change-activity/how-many-imports-next-12-months"),
+    getPage("change-activity/how-many-imports-next-12-months"),
+    postLitresPage("change-activity/how-many-imports-next-12-months", "/change-activity/packaging-site-details"),
+    getPage("change-activity/suggest-deregistration")
   )
   runSimulation()
 
