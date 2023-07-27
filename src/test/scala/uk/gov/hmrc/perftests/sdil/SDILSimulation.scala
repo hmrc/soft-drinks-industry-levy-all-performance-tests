@@ -261,9 +261,40 @@ class SDILSimulation extends PerformanceTestRunner {
 
     getPage("correct-return/own-brands-packaged-at-own-sites"),
     postPage("correct-return/own-brands-packaged-at-own-sites", "true", "/correct-return/how-many-own-brands-packaged-at-own-sites"),
+    getPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
+    postLitresPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
 
+    getPage("correct-return/packaged-as-contract-packer"),
+    postPage("correct-return/packaged-as-contract-packer", "true", "/correct-return/how-many-packaged-as-contract-packer"),
+    getPage("correct-return/how-many-packaged-as-contract-packer"),
+    postLitresPage("correct-return/how-many-packaged-as-contract-packer"),
 
+    getPage("correct-return/exemptions-for-small-producers"),
+    postPage("correct-return/exemptions-for-small-producers", "no"),
 
+    getPage("correct-return/small-producer-details"),
+    postPage("correct-return/small-producer-details", "false"),
+
+//
+//    getBroughtIntoUKPage,
+//    postBroughtIntoUKPage,
+//    getHowManyBroughtIntoUKPage,
+//    postHowManyBroughtIntoUKPage,
+//    getBroughtIntoUKFromSmallProducersPage,
+//    postBroughtIntoUKFromSmallProducersPage,
+//    getHowManyBroughtIntoUKFromSmallProducersPage,
+//    postHowManyBroughtIntoUKFromSmallProducersPage,
+//    getClaimCreditsForExportsPage,
+//    postClaimCreditsForExportsPage,
+//    getHowManyCreditsForExportsPage,
+//    postHowManyCreditsForExportsPage,
+//    getClaimCreditsForLostDamagedPage,
+//    postClaimCreditsForLostDamagedPage,
+//    getHowManyCreditsForLostDamagedPage,
+//    postHowManyCreditsForLostDamagedPage,
+//    getCheckYourAnswersPage,
+//    postCheckYourAnswersPage,
+//    getReturnSentPage
 
     getPage("correct-return/correction-reason"),
     postPage("correct-return/correction-reason", "some reason"),
