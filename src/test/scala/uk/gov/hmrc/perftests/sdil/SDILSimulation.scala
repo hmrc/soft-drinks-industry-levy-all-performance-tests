@@ -237,7 +237,9 @@ class SDILSimulation extends PerformanceTestRunner {
     getPage("select-change"),
     postPage("select-change", "cancelRegistration"),
     getPage("/cancel-registration/reason"),
-    postPage("/cancel-registration/reason", "some reason")
+    postPage("/cancel-registration/reason", "some reason"),
+    getPage("/cancel-registration/date"),
+//    postPage("/cancel-registration/date", "some reason"),
   )
 //  file-return-before-deregistration
 
