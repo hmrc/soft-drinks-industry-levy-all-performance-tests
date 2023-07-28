@@ -29,7 +29,7 @@ class SDILSimulation extends PerformanceTestRunner {
     resetReturns,
     resetRegistrations,
     sdilReturnsCollectionReset,
-    resetUserAnswers(),
+    resetReturnsUserAnswers(),
 
     navigateToAuth,
     createAuthSession(),
@@ -72,7 +72,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-update-registered-details-update-contact", "update-contact").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -96,7 +95,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-update-registered-details-update-site", "update-packaging-site").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -124,7 +122,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-update-registered-details-remove-site", "remove-site").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -152,7 +149,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-change-activity-one-million-or-more", "1 million or more").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -182,7 +178,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-change-activity-less-than-one-million", "less than 1 million").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -214,7 +209,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-change-activity-none-produced", "none produced").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -234,7 +228,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-cancel-registration", "cancel registration").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
@@ -249,7 +242,6 @@ class SDILSimulation extends PerformanceTestRunner {
   )
 
   setup("variations-correct-return", "correct return").withRequests(
-    resetUserAnswers(),
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
