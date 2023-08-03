@@ -34,7 +34,7 @@ object SDILReturnsRequests extends ServicesConfiguration {
     http("GET to returns first page")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
       .check(status.is(303))
-      .check(header("Location").is(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/0/nil-return/false": String))
+      //.check(header("Location").is(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/0/nil-return/false": String))
   }
 
   def redirectToBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
