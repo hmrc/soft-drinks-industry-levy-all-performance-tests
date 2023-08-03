@@ -35,6 +35,7 @@ Run smoke test (locally) as follows:
 ```bash
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all gatling:test
 ```
 
 Run full performance test (locally) as follows:
@@ -46,7 +47,9 @@ sbt -DrunLocal=true gatling:test
 Run smoke test (staging) as follows:
 
 ```bash
-sbt -Dperftest.runSmokeTest=true -DrunLocal=false gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=returns gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=variations gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=all gatling:test
 ```
 
 Run tests using labels
