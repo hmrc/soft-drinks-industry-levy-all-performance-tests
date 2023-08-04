@@ -30,15 +30,14 @@ object SDILReturnsRequests extends ServicesConfiguration {
   val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
   val accountFrontEndRoute: String = "soft-drinks-industry-levy-account-frontend"
 
-  def getToReturns: HttpRequestBuilder = {
-    http("GET to returns first page")
+  def initiateReturnsViaAccounts: HttpRequestBuilder = {
+    http("GET init accounts")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
       .check(status.is(303))
-      //.check(header("Location").is(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/0/nil-return/false": String))
   }
 
   def redirectToBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
-    http("REDIRECT to own-brands-packaged-at-own-sites")
+    http("REDIRECT to returns from accounts")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/0/nil-return/false": String)
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/own-brands-packaged-at-own-sites": String))
@@ -292,6 +291,79 @@ object SDILReturnsRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/check-your-answers": String))
   }
+
+//------------------------------------------
+
+  def getReturnChangeRegistrationPage: HttpRequestBuilder = {
+    http("GET return-change-registration")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/return-change-registration": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postReturnChangeRegistrationPage: HttpRequestBuilder = {
+    http("POST claim-credits-for-lost-damaged")
+      .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/return-change-registration": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("value", "false")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$returnsFrontEndRoute/ask-secondary-warehouses-in-return": String))
+  }
+
+  def getPackAtBusinessAddressChangePage: HttpRequestBuilder = {
+    http("GET pack-at-business-address-in-return")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/pack-at-business-address-in-return": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postPackAtBusinessAddressChangePage: HttpRequestBuilder = {
+    http("POST pack-at-business-address")
+      .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/pack-at-business-address-in-return": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("value", "true")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$returnsFrontEndRoute/packaging-site-details": String))
+  }
+
+  def getProductionSiteDetailsPage: HttpRequestBuilder = {
+    http("GET packaging-site-details")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/packaging-site-details": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def postProductionSiteDetailsPage: HttpRequestBuilder = {
+    http("POST packaging-site-details")
+      .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/packaging-site-details": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("value", "false")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$returnsFrontEndRoute/check-your-answers": String))
+  }
+  def getRemovePackagingSiteDetailsPage: HttpRequestBuilder = {
+    http("GET remove-packaging-site-details")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/remove-packaging-site-details/": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def getSecondaryWarehouseDetailsPAge: HttpRequestBuilder = { //secondary-warehouse-details
+    http("GET secondary-warehouse-details")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/secondary-warehouse-details": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+  def getRemoveWarehouseConfirmPage: HttpRequestBuilder = { //remove-warehouse-confirm
+    http("GETremove-warehouse-details/:index")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/remove-warehouse-details/0": String)
+      .check(saveCsrfToken())
+      .check(status.is(200))
+  }
+
+
+// -------------------------------------------------
 
   def getCheckYourAnswersPage: HttpRequestBuilder = {
     http("GET check-your-answers")

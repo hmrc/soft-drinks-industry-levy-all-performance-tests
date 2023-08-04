@@ -35,7 +35,7 @@ class SDILSimulation extends PerformanceTestRunner {
     createAuthSession(),
     navigateToAuthSession,
 
-    getToReturns,
+    initiateReturnsViaAccounts,
     redirectToBrandsPackagedAtOwnSitesPage,
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
@@ -67,6 +67,13 @@ class SDILSimulation extends PerformanceTestRunner {
     postClaimCreditsForLostDamagedPage,
     getHowManyCreditsForLostDamagedPage,
     postHowManyCreditsForLostDamagedPage,
+    getReturnChangeRegistrationPage,
+    postReturnChangeRegistrationPage,
+    getPackAtBusinessAddressChangePage,
+    postPackAtBusinessAddressChangePage,
+    getProductionSiteDetailsPage,
+    postProductionSiteDetailsPage,
+    getSecondaryWarehouseDetailsPAge,
     getCheckYourAnswersPage,
     postCheckYourAnswersPage,
     getReturnSentPage
