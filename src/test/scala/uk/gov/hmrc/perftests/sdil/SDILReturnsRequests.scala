@@ -27,15 +27,6 @@ object SDILReturnsRequests extends ServicesConfiguration {
   val baseReturnsFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
 
-  val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
-  val accountFrontEndRoute: String = "soft-drinks-industry-levy-account-frontend"
-
-  def initiateReturnsViaAccounts: HttpRequestBuilder = {
-    http("GET init accounts")
-      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
-      .check(status.is(303))
-  }
-
   def redirectToBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
     http("REDIRECT to returns from accounts")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/0/nil-return/false": String)
