@@ -292,8 +292,6 @@ object SDILReturnsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$returnsFrontEndRoute/check-your-answers": String))
   }
 
-//------------------------------------------
-
   def getReturnChangeRegistrationPage: HttpRequestBuilder = {
     http("GET return-change-registration")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/return-change-registration": String)
@@ -361,9 +359,6 @@ object SDILReturnsRequests extends ServicesConfiguration {
       .check(saveCsrfToken())
       .check(status.is(200))
   }
-
-
-// -------------------------------------------------
 
   def getCheckYourAnswersPage: HttpRequestBuilder = {
     http("GET check-your-answers")
