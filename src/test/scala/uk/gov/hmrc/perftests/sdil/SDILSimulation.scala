@@ -50,7 +50,7 @@ class SDILSimulation extends PerformanceTestRunner {
     postAddSmallProducerPage,
     getSmallProducerDetailsPage,
     postSmallProducerDetailsPage,
-    getBroughtIntoUKPage,
+    getBroughtIntoUKPage, 
     postBroughtIntoUKPage,
     getHowManyBroughtIntoUKPage,
     postHowManyBroughtIntoUKPage,
@@ -72,7 +72,8 @@ class SDILSimulation extends PerformanceTestRunner {
     postPackAtBusinessAddressChangePage,
     getProductionSiteDetailsPage,
     postProductionSiteDetailsPage,
-    getSecondaryWarehouseDetailsPAge,
+    getSecondaryWarehouseDetailsPage,
+    postSecondaryWarehouseDetailsPage,
     getCheckYourAnswersPage,
     postCheckYourAnswersPage,
     getReturnSentPage

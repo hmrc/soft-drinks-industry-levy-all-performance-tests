@@ -337,15 +337,26 @@ object SDILReturnsRequests extends ServicesConfiguration {
       .check(status.is(200))
   }
 
-  def getSecondaryWarehouseDetailsPAge: HttpRequestBuilder = { //secondary-warehouse-details
+  def getSecondaryWarehouseDetailsPage: HttpRequestBuilder = { //secondary-warehouse-details
     http("GET secondary-warehouse-details")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/secondary-warehouse-details": String)
       .check(saveCsrfToken())
       .check(status.is(200))
   }
 
+  postSecondaryWarehouseDetailsPage
+
+  def postSecondaryWarehouseDetailsPage: HttpRequestBuilder = {
+    http("POST secondary-warehouse-details")
+      .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/secondary-warehouse-details": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("value", "false")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$returnsFrontEndRoute/check-your-answers": String))
+  }
+
   def getRemoveWarehouseConfirmPage: HttpRequestBuilder = { //remove-warehouse-confirm
-    http("GETremove-warehouse-details/:index")
+    http("GET remove-warehouse-details/:index")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/remove-warehouse-details/0": String)
       .check(saveCsrfToken())
       .check(status.is(200))
