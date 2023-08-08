@@ -24,7 +24,7 @@ import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner {
 
-  setup("sdil-returns-journey", "SDIL Returns journey").withRequests(
+  setup("sdil-returns-journey-1", "SDIL Returns journey 1").withRequests(
     resetPending,
     resetReturns,
     resetRegistrations,
@@ -50,7 +50,54 @@ class SDILSimulation extends PerformanceTestRunner {
     postAddSmallProducerPage,
     getSmallProducerDetailsPage,
     postSmallProducerDetailsPage,
-    getBroughtIntoUKPage, 
+    getBroughtIntoUKPage,
+    postBroughtIntoUKPage,
+    getHowManyBroughtIntoUKPage,
+    postHowManyBroughtIntoUKPage,
+    getBroughtIntoUKFromSmallProducersPage,
+    postBroughtIntoUKFromSmallProducersPage,
+    getHowManyBroughtIntoUKFromSmallProducersPage,
+    postHowManyBroughtIntoUKFromSmallProducersPage,
+    getClaimCreditsForExportsPage,
+    postClaimCreditsForExportsPage,
+    getHowManyCreditsForExportsPage,
+    postHowManyCreditsForExportsPage,
+    getClaimCreditsForLostDamagedPage,
+    postClaimCreditsForLostDamagedPage,
+    getHowManyCreditsForLostDamagedPage,
+    postHowManyCreditsForLostDamagedPage,
+    getCheckYourAnswersPage,
+    postCheckYourAnswersPage,
+    getReturnSentPage
+  )
+
+  setup("sdil-returns-journey-2", "SDIL Returns journey 2").withRequests(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
+    navigateToAuth,
+    createAuthSession(),
+    navigateToAuthSession,
+
+    redirectToBrandsPackagedAtOwnSitesPage,
+    getOwnBrandsPackagedAtOwnSitesPage,
+    postOwnBrandsPackagedAtOwnSitesPage,
+    getHowManyOwnBrandsPackagedAtOwnSitesPage,
+    postHowManyOwnBrandsPackagedAtOwnSitesPage,
+    getPackagedAsContractPackerPage,
+    postPackagedAsContractPackerPage,
+    getHowManyPackagedAsContractPackerPage,
+    postHowManyPackagedAsContractPackerPage,
+    getExemptionsForSmallProducersPage,
+    postExemptionsForSmallProducersPage,
+    getAddSmallProducerPage,
+    postAddSmallProducerPage,
+    getSmallProducerDetailsPage,
+    postSmallProducerDetailsPage,
+    getBroughtIntoUKPage,
     postBroughtIntoUKPage,
     getHowManyBroughtIntoUKPage,
     postHowManyBroughtIntoUKPage,
