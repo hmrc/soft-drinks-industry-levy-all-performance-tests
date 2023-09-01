@@ -25,8 +25,17 @@ import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner
   with SDILReturnJourneyRequests
-  with SDILVariationsJourneyRequests {
+  with SDILVariationsJourneyRequests
+  with SDILRegistrationJourneyRequests {
 
+  setup("sdil-registration-full-allYes-largeProducer", "SDIL Registrations for large producer answers yes to all")
+    .withRequests(sdilRegisterAnswerYesToAllForLargeProducerJourneyRequests:_*)
+
+  setup("sdil-registration-full-allYes-smallProducer", "SDIL Registrations for small producer answers yes to all")
+    .withRequests(sdilRegisterAnswerYesToAllForSmallProducerJourneyRequests: _*)
+
+  setup("sdil-registration-full-allYes-noneProducer", "SDIL Registrations for none producer answers yes to all")
+    .withRequests(sdilRegisterAnswerYesToAllForNoneProducerJourneyRequests: _*)
   setup("sdil-returns-journey-1", "SDIL Returns journey 1").withRequests(
     sdilReturnJourney1Requests:_*
   )
