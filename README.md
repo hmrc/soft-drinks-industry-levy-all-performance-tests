@@ -33,6 +33,7 @@ Do **NOT** run a full performance test against staging from your local machine. 
 Run smoke test (locally) as follows:
 
 ```bash
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=registrations gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all gatling:test
@@ -47,6 +48,7 @@ sbt -DrunLocal=true gatling:test
 Run smoke test (staging) as follows:
 
 ```bash
+sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=registrations gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=returns gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=variations gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=all gatling:test

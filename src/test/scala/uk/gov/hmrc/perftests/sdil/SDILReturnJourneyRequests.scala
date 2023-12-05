@@ -18,6 +18,7 @@ package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, postAccountHomePageStartReturn}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 trait SDILReturnJourneyRequests {
@@ -33,7 +34,8 @@ trait SDILReturnJourneyRequests {
     createAuthSession(),
     navigateToAuthSession,
 
-    redirectToBrandsPackagedAtOwnSitesPage,
+    getAccountHomePage,
+    postAccountHomePageStartReturn,
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
@@ -80,7 +82,8 @@ trait SDILReturnJourneyRequests {
     createAuthSession(),
     navigateToAuthSession,
 
-    redirectToBrandsPackagedAtOwnSitesPage,
+    getAccountHomePage,
+    postAccountHomePageStartReturn,
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
