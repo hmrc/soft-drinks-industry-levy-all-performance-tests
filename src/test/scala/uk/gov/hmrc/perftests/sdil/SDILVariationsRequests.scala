@@ -41,7 +41,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
+      .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
 
   def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
@@ -50,7 +50,15 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
+      .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
+  }
+
+  def postPackagingSiteDetailsPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+    http(s"POST $url")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("value", body)
+      .check(status.is(303))
   }
 
   def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
@@ -59,7 +67,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
-      .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
+      .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp/$redirectUrl(.*)": String))
   }
 
   def postChangeContactDetailsOnlyPage(url: String): HttpRequestBuilder = {
@@ -67,9 +75,8 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value[1]", "contactDetails")
-
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute/change-registered-details/contact-details": String))
+      .check(header("Location").is(s"/$frontEndRoute/change-registered-details/contact-details-add": String))
   }
 
   def postChangeSitesOnlyPage(url: String): HttpRequestBuilder = {
@@ -108,7 +115,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("litres.lowBand", "100")
       .formParam("litres.highBand", "100")
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
+      .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
 
   def postContactDetailsAddPage(redirectUrl: String = ""): HttpRequestBuilder = {
@@ -120,7 +127,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("phoneNumber", "01234567890")
       .formParam("email", "example@sample.com")
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
+      .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
 
   def postCancelDatePage: HttpRequestBuilder = {
@@ -131,10 +138,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("cancelRegistrationDate.month", (LocalDate.now().plusDays(2).getMonthValue).toString)
       .formParam("cancelRegistrationDate.year", (LocalDate.now().plusDays(2).getYear).toString)
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute": String))
+      .check(header("Location").is(s"/$frontEndRoute/cancel-registration/check-your-answers": String))
   }
-
-
-
 
 }

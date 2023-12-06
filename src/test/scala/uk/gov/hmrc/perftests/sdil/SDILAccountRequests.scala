@@ -32,12 +32,12 @@ object SDILAccountRequests extends ServicesConfiguration {
   def getAccountHomePage: HttpRequestBuilder = {
     http("GET account-home")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute": String)
-      .check(saveCsrfToken())
       .check(status.is(200))
+      .check(saveCsrfToken())
   }
 
   def postAccountHomePageStartReturn: HttpRequestBuilder = {
-    http("POST account-home")
+    http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
@@ -45,7 +45,7 @@ object SDILAccountRequests extends ServicesConfiguration {
   }
 
   def postAccountHomePageStartNoActivityReturn: HttpRequestBuilder = {
-    http("POST account-home")
+    http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/true": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
@@ -53,9 +53,9 @@ object SDILAccountRequests extends ServicesConfiguration {
   }
 
   def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder = {
-    http("POST account-home")
+    http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/make-a-change": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      //.formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
   }
