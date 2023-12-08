@@ -26,6 +26,7 @@ object SDILAccountRequests extends ServicesConfiguration {
 
   val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
   val accountFrontEndRoute: String   = "soft-drinks-industry-levy-account-frontend"
+  val baseReturnsFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
   val variationsFrontEndRoute: String   = "soft-drinks-industry-levy-variations-frontend"
 
@@ -44,12 +45,18 @@ object SDILAccountRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
   }
 
-  def postAccountHomePageStartNoActivityReturn: HttpRequestBuilder = {
-    http(s"POST account-home")
-      .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/true": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+  def getAccountHomePageStartNoActivityReturn1: HttpRequestBuilder = {
+    http(s"GET account-home-start-no-activity-return")
+      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/true": String)
       .check(status.is(303))
-      .check(header("Location").is(s"/$returnsFrontEndRoute/check-your-answers": String))
+      .check(saveCsrfToken())
+  }
+
+  def getAccountHomePageStartNoActivityReturn2: HttpRequestBuilder = {
+    http(s"GET account-home-start-no-activity-return-2")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/true": String)
+      .check(status.is(303))
+      .check(saveCsrfToken())
   }
 
   def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder = {

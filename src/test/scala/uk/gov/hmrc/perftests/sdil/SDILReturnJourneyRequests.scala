@@ -34,8 +34,8 @@ trait SDILReturnJourneyRequests {
     createAuthSession(),
     navigateToAuthSession,
 
-    getAccountHomePage,
-    postAccountHomePageStartReturn,
+//    getAccountHomePage,
+//    postAccountHomePageStartReturn, //TODO - this should probably be a get. See variations last journey
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,

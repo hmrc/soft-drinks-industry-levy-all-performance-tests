@@ -18,18 +18,25 @@ package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
-import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, postAccountHomePageStartNoActivityReturn, postAccountHomePageTellHMRCAboutAChange}
+import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests.{getCheckYourAnswersPage, getReturnSentPage, postCheckYourAnswersPage}
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
+import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 trait SDILVariationsJourneyRequests {
 
   val sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
@@ -42,11 +49,17 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
@@ -65,11 +78,17 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsRemoveSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
@@ -92,11 +111,17 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityOneMillionLitresOrMoreJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "changeActivity", "change-activity/amount-produced"),
     getPage("change-activity/amount-produced"),
@@ -123,11 +148,17 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityLessThanOneMillionLitresJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "changeActivity", "change-activity/amount-produced"),
     getPage("change-activity/amount-produced"),
@@ -156,11 +187,17 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityNoneProducedJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "changeActivity", "change-activity/amount-produced"),
     getPage("change-activity/amount-produced"),
@@ -177,11 +214,17 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationCancelRegistrationJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
+
     getAccountHomePage,
-    //postAccountHomePageTellHMRCAboutAChange,
     getPage("select-change"),
     postPage("select-change", "cancelRegistration", "cancel-registration/file-return-before-deregistration"),
     getPage("cancel-registration/reason"),
@@ -194,72 +237,80 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationCorrectReturnJourneyRequests: Seq[HttpRequestBuilder] = Seq(
+    resetPending,
+    resetReturns,
+    resetRegistrations,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
+
     navigateToAuth,
     createAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
-    //postAccountHomePageStartNoActivityReturn,
+    getAccountHomePageStartNoActivityReturn1,
+    getAccountHomePageStartNoActivityReturn2,
+
     getCheckYourAnswersPage,
     postCheckYourAnswersPage,
     getReturnSentPage,
 
     getAccountHomePage,
-    postAccountHomePageTellHMRCAboutAChange,
 
     getPage("select-change"),
     postPage("select-change", "correctReturn", "correct-return/select"),
 
-    getPage("/correct-return/select"),
-    postPage("select", "YEAR-2023-QUARTER-1", "correct-return/own-brands-packaged-at-own-sites"),
-    //postSelectPeriodPage,
+    getPage("correct-return/select"),
+    postPage("correct-return/select", "YEAR-2023-QUARTER-1", "correct-return/own-brands-packaged-at-own-sites"),
 
     getPage("correct-return/own-brands-packaged-at-own-sites"),
     postPage("correct-return/own-brands-packaged-at-own-sites", "true", "correct-return/how-many-own-brands-packaged-at-own-sites"),
     getPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
-    postLitresPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
+    postLitresPage("correct-return/how-many-own-brands-packaged-at-own-sites", "correct-return/packaged-as-contract-packer"),
 
     getPage("correct-return/packaged-as-contract-packer"),
     postPage("correct-return/packaged-as-contract-packer", "true", "correct-return/how-many-packaged-as-contract-packer"),
     getPage("correct-return/how-many-packaged-as-contract-packer"),
-    postLitresPage("correct-return/how-many-packaged-as-contract-packer"),
+    postLitresPage("correct-return/how-many-packaged-as-contract-packer", "correct-return/exemptions-for-small-producers"),
 
     getPage("correct-return/exemptions-for-small-producers"),
-    postPage("correct-return/exemptions-for-small-producers", "no"),
-
+    postPage("correct-return/exemptions-for-small-producers", "true", "correct-return/add-small-producer"),
+    getPage("correct-return/add-small-producer"),
+    postAddSmallProducerPage,
     getPage("correct-return/small-producer-details"),
-    postPage("correct-return/small-producer-details", "false"),
+    postPage("correct-return/small-producer-details", "false", "correct-return/brought-into-uk"),
 
     getPage("correct-return/brought-into-uk"),
     postPage("correct-return/brought-into-uk", "true", "correct-return/how-many-brought-into-uk"),
     getPage("correct-return/how-many-brought-into-uk"),
-    postLitresPage("correct-return/how-many-brought-into-uk"),
+    postLitresPage("correct-return/how-many-brought-into-uk", "correct-return/brought-into-uk-from-small-producers"),
 
     getPage("correct-return/brought-into-uk-from-small-producers"),
     postPage("correct-return/brought-into-uk-from-small-producers", "true", "correct-return/how-many-into-uk-small-producers"),
     getPage("correct-return/how-many-into-uk-small-producers"),
-    postLitresPage("correct-return/how-many-into-uk-small-producers"),
+    postLitresPage("correct-return/how-many-into-uk-small-producers", "correct-return/claim-credits-for-exports"),
 
-    getPage("correct-return/claim-credits-for-exports"), //TODO - complete after pages have been implemented
+    getPage("correct-return/claim-credits-for-exports"),
     postPage("correct-return/claim-credits-for-exports", "true", "correct-return/how-many-credits-for-exports"),
     getPage("correct-return/how-many-credits-for-exports"),
-    postLitresPage("correct-return/how-many-credits-for-exports"),
+    postLitresPage("correct-return/how-many-credits-for-exports", "correct-return/claim-credits-for-lost-damaged"),
 
     getPage("correct-return/claim-credits-for-lost-damaged"),
     postPage("correct-return/claim-credits-for-lost-damaged", "true", "correct-return/how-many-credits-for-lost-damaged"),
     getPage("correct-return/how-many-credits-for-lost-damaged"),
-    postLitresPage("correct-return/how-many-credits-for-lost-damaged"),
+    postLitresPage("correct-return/how-many-credits-for-lost-damaged", "correct-return/check-your-answers"),
 
     getPage("correct-return/check-your-answers"),
-    postFormlessPage("correct-return/check-your-answers"), //TODO - complete after pages have been implemented
+    postFormlessPage("correct-return/check-your-answers", "correct-return/correction-reason"),
 
     getPage("correct-return/correction-reason"),
-    postPage("correct-return/correction-reason", "some reason"),
-    getPage("correct-return/repayment-method"),
-    postPage("correct-return/repayment-method", "bankAccount"),
-    getPage("correct-return//check-your-answers"),
+    postPage("correct-return/correction-reason", "some reason", "correct-return/repayment-method"),
 
-    getPage("correct-return/check-your-answers"),
-    postFormlessPage("correct-return/check-your-answers"), //TODO - complete after pages have been implemented
+    getPage("correct-return/repayment-method"), //TODO - will change at some point
+    postPage("correct-return/repayment-method", "bankAccount", "correct-return/check-changes"),
+
+    getPage("correct-return/check-changes"),
+    postFormlessPage("correct-return/check-changes", "correct-return/update-done"),
+    getPage("correct-return/update-done")
   )
 }

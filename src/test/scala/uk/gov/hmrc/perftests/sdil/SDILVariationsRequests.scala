@@ -141,4 +141,16 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute/cancel-registration/check-your-answers": String))
   }
 
+  def postAddSmallProducerPage: HttpRequestBuilder = {
+    http("POST add-small-producer")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/correct-return/add-small-producer": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("producerName", "Fake Producer")
+      .formParam("referenceNumber", "XZSDIL000000234")
+      .formParam("litres.lowBand", "1000")
+      .formParam("litres.highBand", "1000")
+      .check(status.is(303))
+      .check(header("Location").is(s"/$frontEndRoute/correct-return/small-producer-details": String))
+  }
+
 }
