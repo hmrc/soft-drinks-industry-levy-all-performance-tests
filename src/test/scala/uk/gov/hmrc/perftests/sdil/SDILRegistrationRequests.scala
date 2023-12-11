@@ -62,6 +62,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   }
 
   def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+    println("here1")
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
@@ -69,6 +70,24 @@ object SDILRegistrationRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
       .check(header("Location").saveAs("addressOffRampUrl"))
+  }
+
+  def getPackagingSiteNamePage(): HttpRequestBuilder = {
+    println("here2")
+    http(s"POST packaging-site-name")
+      .get(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
+      .check(status.is(303))
+      .check(saveCsrfToken())
+  }
+
+  def postPackagingSiteNamePage(redirectUrl: String = ""): HttpRequestBuilder = {
+    println("here3")
+    http(s"POST packaging-site-name")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("packagingSiteName", "pSiteName")
+      .check(status.is(303))
+      .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
   }
 
   def getAddressRampOffPage(redirectUrl: String): HttpRequestBuilder = {
