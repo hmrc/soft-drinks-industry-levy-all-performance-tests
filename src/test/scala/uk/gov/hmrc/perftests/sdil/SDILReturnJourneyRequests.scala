@@ -18,7 +18,7 @@ package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
-import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, postAccountHomePageStartReturn}
+import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartReturn1, getAccountHomePageStartReturn2, postAccountHomePageStartReturn}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 trait SDILReturnJourneyRequests {
@@ -34,8 +34,10 @@ trait SDILReturnJourneyRequests {
     createAuthSession(),
     navigateToAuthSession,
 
-//    getAccountHomePage,
-//    postAccountHomePageStartReturn, //TODO - this should probably be a get. See variations last journey
+    getAccountHomePage,
+    getAccountHomePageStartReturn1,
+    getAccountHomePageStartReturn2,
+
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
@@ -83,7 +85,9 @@ trait SDILReturnJourneyRequests {
     navigateToAuthSession,
 
     getAccountHomePage,
-    postAccountHomePageStartReturn,
+    getAccountHomePageStartReturn1,
+    getAccountHomePageStartReturn2,
+
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,

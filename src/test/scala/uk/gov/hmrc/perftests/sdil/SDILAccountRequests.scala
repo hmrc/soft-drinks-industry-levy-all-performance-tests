@@ -45,6 +45,20 @@ object SDILAccountRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
   }
 
+  def getAccountHomePageStartReturn1: HttpRequestBuilder = {
+    http(s"GET account-home-start-return")
+      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
+      .check(status.is(303))
+      .check(saveCsrfToken())
+  }
+
+  def getAccountHomePageStartReturn2: HttpRequestBuilder = {
+    http(s"GET account-home-start-return-2")
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/false": String)
+      .check(status.is(303))
+      .check(saveCsrfToken())
+  }
+
   def getAccountHomePageStartNoActivityReturn1: HttpRequestBuilder = {
     http(s"GET account-home-start-no-activity-return")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/true": String)
