@@ -2,22 +2,16 @@
 
 # soft-drinks-industry-levy-all-performance-tests
 
-Performance test suite for the `<digital service name>`, using [performance-test-runner](https://github.com/hmrc/performance-test-runner) under the hood.
+Performance test suite for the `soft-drinks-industry-levy`, using [performance-test-runner](https://github.com/hmrc/performance-test-runner) under the hood.
 
 ## Pre-requisites
 
 ### Services
 
-Start Mongo Docker container as follows:
+Start `soft-drinks-industry-levy` services as follows:
 
 ```bash
-docker run --rm -d --name mongo -d -p 27017:27017 mongo:4.0
-```
-
-Start `PLATFORM_EXAMPLE_UI_TESTS` services as follows:
-
-```bash
-sm --start PLATFORM_EXAMPLE_UI_TESTS -r --wait 100
+sm2 --start SDIL_ALL
 ```
 
 ### Logging
@@ -33,6 +27,7 @@ Do **NOT** run a full performance test against staging from your local machine. 
 Run smoke test (locally) as follows:
 
 ```bash
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=registrations gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations gatling:test
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all gatling:test
@@ -44,13 +39,9 @@ Run full performance test (locally) as follows:
 sbt -DrunLocal=true gatling:test
 ```
 
-Run smoke test (staging) as follows:
+Run tests (Staging) from Jenkins here:
 
-```bash
-sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=returns gatling:test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=variations gatling:test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=false -Dperftest.labels=all gatling:test
-```
+https://performance.tools.staging.tax.service.gov.uk/job/soft-drinks-industry-levy-all-performance-tests/
 
 Run tests using labels
 

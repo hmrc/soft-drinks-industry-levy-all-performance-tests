@@ -26,6 +26,9 @@ object SDILReturnsRequests extends ServicesConfiguration {
 
   val baseReturnsFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
+  val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
+  val accountFrontEndRoute: String   = "soft-drinks-industry-levy-account-frontend"
+
 
   def redirectToBrandsPackagedAtOwnSitesPage: HttpRequestBuilder = {
     http("REDIRECT to returns from accounts")
