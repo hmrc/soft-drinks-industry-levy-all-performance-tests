@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -298,7 +298,7 @@ trait SDILVariationsJourneyRequests {
     getPage("correct-return/claim-credits-for-lost-damaged"),
     postPage("correct-return/claim-credits-for-lost-damaged", "true", "correct-return/how-many-credits-for-lost-damaged"),
     getPage("correct-return/how-many-credits-for-lost-damaged"),
-    postLitresPage("correct-return/how-many-credits-for-lost-damaged", "correct-return/check-your-answers"),
+    postLitresPage("correct-return/how-many-credits-for-lost-damaged", "correct-return/check-your-answers", "500", "500"),
 
     getPage("correct-return/check-your-answers"),
     postFormlessPage("correct-return/check-your-answers", "correct-return/correction-reason"),
@@ -306,7 +306,7 @@ trait SDILVariationsJourneyRequests {
     getPage("correct-return/correction-reason"),
     postPage("correct-return/correction-reason", "some reason", "correct-return/repayment-method"),
 
-    getPage("correct-return/repayment-method"), //TODO - will change at some point
+    getPage("correct-return/repayment-method"),
     postPage("correct-return/repayment-method", "bankAccount", "correct-return/check-changes"),
 
     getPage("correct-return/check-changes"),

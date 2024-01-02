@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,12 +108,12 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/": String))
   }
 
-  def postLitresPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postLitresPage(url: String, redirectUrl: String = "", highBand: String = "100", lowBand: String = "100"): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("litres.lowBand", "100")
-      .formParam("litres.highBand", "100")
+      .formParam("litres.lowBand", lowBand)
+      .formParam("litres.highBand", highBand)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
