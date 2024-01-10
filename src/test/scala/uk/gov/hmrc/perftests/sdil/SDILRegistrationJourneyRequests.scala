@@ -25,10 +25,10 @@ trait SDILRegistrationJourneyRequests {
 
   val resetDataAndSignin = Seq(
     resetPending,
-    resetReturns,
+//    resetReturns,
     resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
     navigateToAuth,
     createAuthSession("3000000000"),
     navigateToAuthSession,

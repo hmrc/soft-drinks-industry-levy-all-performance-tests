@@ -24,56 +24,47 @@ import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postCancelDat
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner
+  with SDILRegistrationJourneyRequests
   with SDILReturnJourneyRequests
-  with SDILVariationsJourneyRequests
-  with SDILRegistrationJourneyRequests {
+  with SDILVariationsJourneyRequests {
 
   setup("sdil-registration-full-allYes-largeProducer", "SDIL Registrations for large producer answers yes to all")
     .withRequests(sdilRegisterAnswerYesToAllForLargeProducerJourneyRequests:_*)
-
   setup("sdil-registration-full-allYes-smallProducer", "SDIL Registrations for small producer answers yes to all")
     .withRequests(sdilRegisterAnswerYesToAllForSmallProducerJourneyRequests: _*)
-
   setup("sdil-registration-full-allYes-noneProducer", "SDIL Registrations for none producer answers yes to all")
     .withRequests(sdilRegisterAnswerYesToAllForNoneProducerJourneyRequests: _*)
-  setup("sdil-returns-journey-1", "SDIL Returns journey 1").withRequests(
-    sdilReturnJourney1Requests:_*
+
+  setup("sdil-returns-journey-1", "SDIL Returns journey 1")
+    .withRequests(sdilReturnJourney1Requests:_*
+  )
+  setup("sdil-returns-journey-2", "SDIL Returns journey 2")
+    .withRequests(sdilReturnJourney2Requests:_*
   )
 
-  setup("sdil-returns-journey-2", "SDIL Returns journey 2").withRequests(
-    sdilReturnJourney2Requests:_*
+  setup("variations-update-registered-details-update-contact", "update-contact")
+    .withRequests(sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests:_*
   )
-
-  setup("variations-update-registered-details-update-contact", "update-contact").withRequests(
-    sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests:_*
+  setup("variations-update-registered-details-update-site", "update-packaging-site")
+    .withRequests(sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests:_*
   )
-
-  setup("variations-update-registered-details-update-site", "update-packaging-site").withRequests(
-    sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests:_*
+  setup("variations-update-registered-details-remove-site", "remove-site")
+    .withRequests(sdilVariationUpdateRegisteredDetailsRemoveSiteJourneyRequests:_*
   )
-
-  setup("variations-update-registered-details-remove-site", "remove-site").withRequests(
-    sdilVariationUpdateRegisteredDetailsRemoveSiteJourneyRequests:_*
+  setup("variations-change-activity-one-million-or-more", "1 million or more")
+    .withRequests(sdilVariationChangeActivityOneMillionLitresOrMoreJourneyRequests:_*
   )
-
-  setup("variations-change-activity-one-million-or-more", "1 million or more").withRequests(
-    sdilVariationChangeActivityOneMillionLitresOrMoreJourneyRequests:_*
+  setup("variations-change-activity-less-than-one-million", "less than 1 million")
+    .withRequests(sdilVariationChangeActivityLessThanOneMillionLitresJourneyRequests:_*
   )
-
-  setup("variations-change-activity-less-than-one-million", "less than 1 million").withRequests(
-    sdilVariationChangeActivityLessThanOneMillionLitresJourneyRequests:_*
+  setup("variations-change-activity-none-produced", "none produced")
+    .withRequests(sdilVariationChangeActivityNoneProducedJourneyRequests:_*
   )
-
-  setup("variations-change-activity-none-produced", "none produced").withRequests(
-    sdilVariationChangeActivityNoneProducedJourneyRequests:_*
+  setup("variations-cancel-registration", "cancel registration")
+    .withRequests(sdilVariationCancelRegistrationJourneyRequests:_*
   )
-
-  setup("variations-cancel-registration", "cancel registration").withRequests(
-    sdilVariationCancelRegistrationJourneyRequests:_*
-  )
-
-  setup("variations-correct-return", "correct return").withRequests(
-    sdilVariationCorrectReturnJourneyRequests:_*
+  setup("variations-correct-return", "correct return")
+    .withRequests(sdilVariationCorrectReturnJourneyRequests:_*
   )
 
   runSimulation()

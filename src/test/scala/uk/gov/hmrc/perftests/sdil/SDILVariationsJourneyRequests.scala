@@ -17,7 +17,7 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests.{getCheckYourAnswersPage, getReturnSentPage, postCheckYourAnswersPage}
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
@@ -26,14 +26,14 @@ import uk.gov.hmrc.perftests.sdil.SetupRequests._
 trait SDILVariationsJourneyRequests {
 
   val sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -49,14 +49,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -78,14 +78,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsRemoveSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -111,14 +111,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityOneMillionLitresOrMoreJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -148,14 +148,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityLessThanOneMillionLitresJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -187,14 +187,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityNoneProducedJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -214,14 +214,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationCancelRegistrationJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    resetRegistrations,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -237,14 +237,14 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationCorrectReturnJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
+//    resetPending,
     resetReturns,
-    resetRegistrations,
+//    resetRegistrations,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession(),
     navigateToAuthSession,
 
     getAccountHomePage,

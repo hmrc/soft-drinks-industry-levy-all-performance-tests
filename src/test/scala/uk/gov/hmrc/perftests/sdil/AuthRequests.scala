@@ -51,6 +51,8 @@ object AuthRequests extends BaseRequest {
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(303))
 
+  def createVariationsAuthSession(): HttpRequestBuilder = createAuthSession("0000000079")
+
   lazy val navigateToAuthSession: HttpRequestBuilder =
     http("Navigate to Auth Session page")
       .get(authSession)
