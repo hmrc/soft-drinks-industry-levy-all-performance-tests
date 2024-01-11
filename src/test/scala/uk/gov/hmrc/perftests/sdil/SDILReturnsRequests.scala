@@ -116,7 +116,8 @@ object SDILReturnsRequests extends ServicesConfiguration {
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value", "true")
       .check(status.is(303))
-      .check(header("Location").is(s"/$returnsFrontEndRoute/add-small-producer": String))
+//      .check(header("Location").is(s"/$returnsFrontEndRoute/add-small-producer": String))
+      .check(header("Location").is(s"/$returnsFrontEndRoute/small-producer-details": String))
   }
 
   def getAddSmallProducerPage: HttpRequestBuilder = {

@@ -37,7 +37,7 @@ object AuthRequests extends BaseRequest {
       .get(authWizUrl)
       .check(status.is(200))
 
-  def createAuthSession(utr: String = "0000000437"): HttpRequestBuilder =
+  def createAuthSession(utr: String): HttpRequestBuilder =
     http("Create Auth Session")
       .post(authWizUrl)
       .formParam("redirectionUrl", authSession)
@@ -51,9 +51,9 @@ object AuthRequests extends BaseRequest {
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(303))
 
-  def createVariationsAuthSession(): HttpRequestBuilder = createAuthSession("0000000079")
-
-  def createRegistrationsAuthSession(): HttpRequestBuilder = createAuthSession("${UTR}")
+  def createRegistrationsAuthSession(): HttpRequestBuilder = createAuthSession("${RegistrationsUTR}")
+  def createReturnsAuthSession(): HttpRequestBuilder = createAuthSession("${ReturnsUTR}")
+  def createVariationsAuthSession(): HttpRequestBuilder = createAuthSession("${VariationsUTR}")
 
   lazy val navigateToAuthSession: HttpRequestBuilder =
     http("Navigate to Auth Session page")

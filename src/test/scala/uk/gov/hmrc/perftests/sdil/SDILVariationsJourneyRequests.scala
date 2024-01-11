@@ -33,7 +33,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -56,7 +56,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -85,7 +85,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -118,7 +118,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -155,7 +155,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -194,7 +194,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -221,7 +221,7 @@ trait SDILVariationsJourneyRequests {
 //    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -244,7 +244,7 @@ trait SDILVariationsJourneyRequests {
     resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createVariationsAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,

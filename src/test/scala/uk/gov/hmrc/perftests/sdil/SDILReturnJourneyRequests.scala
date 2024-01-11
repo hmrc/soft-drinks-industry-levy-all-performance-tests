@@ -17,7 +17,7 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createReturnsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartReturn1, getAccountHomePageStartReturn2, postAccountHomePageStartReturn}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
@@ -31,7 +31,7 @@ trait SDILReturnJourneyRequests {
     resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createReturnsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -48,8 +48,8 @@ trait SDILReturnJourneyRequests {
     postHowManyPackagedAsContractPackerPage,
     getExemptionsForSmallProducersPage,
     postExemptionsForSmallProducersPage,
-    getAddSmallProducerPage,
-    postAddSmallProducerPage,
+//    getAddSmallProducerPage,
+//    postAddSmallProducerPage,
     getSmallProducerDetailsPage,
     postSmallProducerDetailsPage,
     getBroughtIntoUKPage,
@@ -81,7 +81,7 @@ trait SDILReturnJourneyRequests {
     resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createReturnsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -98,8 +98,8 @@ trait SDILReturnJourneyRequests {
     postHowManyPackagedAsContractPackerPage,
     getExemptionsForSmallProducersPage,
     postExemptionsForSmallProducersPage,
-    getAddSmallProducerPage,
-    postAddSmallProducerPage,
+//    getAddSmallProducerPage,
+//    postAddSmallProducerPage,
     getSmallProducerDetailsPage,
     postSmallProducerDetailsPage,
     getBroughtIntoUKPage,
