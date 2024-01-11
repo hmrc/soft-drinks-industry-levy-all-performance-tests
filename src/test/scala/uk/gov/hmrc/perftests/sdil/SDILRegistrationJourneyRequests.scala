@@ -17,7 +17,7 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createRegistrationsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILRegistrationRequests.{getPage, postPage, _}
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
@@ -30,7 +30,7 @@ trait SDILRegistrationJourneyRequests {
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
     navigateToAuth,
-    createAuthSession("3000000000"),
+    createRegistrationsAuthSession,
     navigateToAuthSession,
   )
 

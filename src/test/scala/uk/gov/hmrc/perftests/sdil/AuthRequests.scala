@@ -53,6 +53,8 @@ object AuthRequests extends BaseRequest {
 
   def createVariationsAuthSession(): HttpRequestBuilder = createAuthSession("0000000079")
 
+  def createRegistrationsAuthSession(): HttpRequestBuilder = createAuthSession("${UTR}")
+
   lazy val navigateToAuthSession: HttpRequestBuilder =
     http("Navigate to Auth Session page")
       .get(authSession)
