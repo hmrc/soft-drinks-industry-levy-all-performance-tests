@@ -124,9 +124,9 @@ object SDILRegistrationRequests extends ServicesConfiguration {
     http("POST start-date")
       .post(s"$baseFrontEndUrl/$frontEndRoute/start-date": String)
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("startDate.day", (LocalDate.now().minusDays(2).getDayOfMonth).toString)
-      .formParam("startDate.month", (LocalDate.now().minusDays(2).getMonthValue).toString)
-      .formParam("startDate.year", (LocalDate.now().minusDays(2).getYear).toString)
+      .formParam("startDate.day", (LocalDate.now().minusDays(4).getDayOfMonth).toString)
+      .formParam("startDate.month", (LocalDate.now().minusDays(4).getMonthValue).toString)
+      .formParam("startDate.year", (LocalDate.now().minusDays(4).getYear).toString)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
   }
