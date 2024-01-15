@@ -24,7 +24,7 @@ import uk.gov.hmrc.perftests.sdil.SetupRequests._
 trait SDILReturnJourneyRequests {
 
   val sdilReturnJourney1Requests: Seq[HttpRequestBuilder] = Seq(
-//    resetPending,
+    resetPending,
     resetReturns,
 //    resetRegistrations,
     sdilReturnsCollectionReset,
@@ -48,8 +48,8 @@ trait SDILReturnJourneyRequests {
     postHowManyPackagedAsContractPackerPage,
     getExemptionsForSmallProducersPage,
     postExemptionsForSmallProducersPage,
-//    getAddSmallProducerPage,
-//    postAddSmallProducerPage,
+    getAddSmallProducerPage,
+    postAddSmallProducerPage,
     getSmallProducerDetailsPage,
     postSmallProducerDetailsPage,
     getBroughtIntoUKPage,
@@ -74,7 +74,7 @@ trait SDILReturnJourneyRequests {
   )
 
   val sdilReturnJourney2Requests: Seq[HttpRequestBuilder] = Seq(
-//    resetPending,
+    resetPending,
     resetReturns,
 //    resetRegistrations,
     sdilReturnsCollectionReset,
@@ -98,8 +98,8 @@ trait SDILReturnJourneyRequests {
     postHowManyPackagedAsContractPackerPage,
     getExemptionsForSmallProducersPage,
     postExemptionsForSmallProducersPage,
-//    getAddSmallProducerPage,
-//    postAddSmallProducerPage,
+    getAddSmallProducerPage,
+    postAddSmallProducerPage,
     getSmallProducerDetailsPage,
     postSmallProducerDetailsPage,
     getBroughtIntoUKPage,
