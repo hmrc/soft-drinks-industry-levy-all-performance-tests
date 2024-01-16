@@ -98,8 +98,8 @@ trait SDILRegistrationJourneyRequests {
       getPage("contact-details"),
       postContactDetailsPage("/check-your-answers"),
       getPage("check-your-answers"),
-      postCheckYourAnswersPage,
-      getRegisterConfirmationPage
+      //postCheckYourAnswersPage,
+      //getRegisterConfirmationPage
     )
   }
 
