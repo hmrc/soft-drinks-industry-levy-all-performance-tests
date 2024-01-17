@@ -240,9 +240,9 @@ trait SDILVariationsJourneyRequests {
 
   val sdilVariationCorrectReturnJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
-    resetReturns,
+//    resetReturns,
 //    resetRegistrations,
-    sdilReturnsCollectionReset,
+//    sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
 
     navigateToAuth,
