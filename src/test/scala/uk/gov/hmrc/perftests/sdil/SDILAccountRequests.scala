@@ -37,11 +37,11 @@ object SDILAccountRequests extends ServicesConfiguration {
       .check(saveCsrfToken())
   }
 
-  def getNextRequest: String = {
+  def getNextRequest: HttpRequestBuilder = {
     http("GET account-home")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/:isNilReturn": String)
       .check(status.is(200))
-      .check(saveCsrfToken()).toString
+      .check(saveCsrfToken())
   }
 
   def postAccountHomePageStartReturn: HttpRequestBuilder = {
@@ -61,11 +61,10 @@ object SDILAccountRequests extends ServicesConfiguration {
 
   def getAccountHomePageStartReturn2: HttpRequestBuilder = {
     http(s"GET account-home-start-return-2")
-      .get(getNextRequest)
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/false": String)
       .check(status.is(303))
       .check(saveCsrfToken())
   }
-
 //
 //
 //  def getAccountHomePageStartReturn2: HttpRequestBuilder = {

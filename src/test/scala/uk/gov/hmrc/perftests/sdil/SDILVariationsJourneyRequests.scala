@@ -18,7 +18,7 @@ package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
-import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2, getAccountHomePageStartReturn2, getAccountHomePageStartReturn3, postAccountHomePageStartNoActivityReturn1}
+import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2, getAccountHomePageStartReturn3, postAccountHomePageStartNoActivityReturn1}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests.{getCheckYourAnswersPage, getReturnSentPage, postCheckYourAnswersPage}
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
@@ -249,7 +249,6 @@ trait SDILVariationsJourneyRequests {
     createVariationsAuthSession,
     navigateToAuthSession,
     getAccountHomePage,
-    getAccountHomePageStartReturn2,
 
 
 
