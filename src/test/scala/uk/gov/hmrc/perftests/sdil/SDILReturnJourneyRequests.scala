@@ -26,7 +26,6 @@ trait SDILReturnJourneyRequests {
   val sdilReturnJourney1Requests: Seq[HttpRequestBuilder] = Seq(
     resetPending,
     resetReturns,
-//    resetRegistrations,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
 
@@ -76,7 +75,6 @@ trait SDILReturnJourneyRequests {
   val sdilReturnJourney2Requests: Seq[HttpRequestBuilder] = Seq(
     resetPending,
     resetReturns,
-//    resetRegistrations,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
 

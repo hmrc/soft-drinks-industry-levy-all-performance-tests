@@ -26,7 +26,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -49,7 +48,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -78,7 +76,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationUpdateRegisteredDetailsRemoveSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -113,7 +110,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationChangeActivityOneMillionLitresOrMoreJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -150,7 +146,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationChangeActivityLessThanOneMillionLitresJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -189,7 +184,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationChangeActivityNoneProducedJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -216,7 +210,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationCancelRegistrationJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 //    resetPending,
 //    resetReturns,
-//    resetRegistrations,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
 
@@ -239,7 +232,6 @@ trait SDILVariationsJourneyRequests {
   val sdilVariationCorrectReturnJourneyRequests: Seq[HttpRequestBuilder] = Seq(
 ////    resetPending,
 ////    resetReturns,
-////    resetRegistrations,
 ////    sdilReturnsCollectionReset,
 ////    resetReturnsUserAnswers(),
 //
