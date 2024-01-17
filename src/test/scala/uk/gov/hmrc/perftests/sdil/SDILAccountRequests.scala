@@ -65,42 +65,6 @@ object SDILAccountRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(saveCsrfToken())
   }
-//
-//
-//  def getAccountHomePageStartReturn2: HttpRequestBuilder = {
-//    http(s"GET account-home-start-return-2")
-//      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/false": String)
-//      .check(status.is(303))
-//      .check(saveCsrfToken())
-//  }
-
-  def getAccountHomePageStartReturn3: HttpRequestBuilder = {
-    http(s"GET account-home-start-return-3")
-      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/check-your-answers": String)
-      .check(status.is(303))
-      .check(saveCsrfToken())
-  }
-
-  def getAccountHomePageStartNoActivityReturn1: HttpRequestBuilder = {
-    http(s"GET account-home-start-no-activity-return")
-      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/true": String)
-      .check(status.is(303))
-      .check(saveCsrfToken())
-  }
-
-  def postAccountHomePageStartNoActivityReturn1: HttpRequestBuilder = {
-    http(s"POST account-home-start-no-activity-return")
-      .post(s"$baseAccountFrontEndUrl/$returnsFrontEndRoute/check-your-answers": String)
-      .formParam("csrfToken", s"$${csrfToken}")
-      .check(status.is(303))
-  }
-
-  def getAccountHomePageStartNoActivityReturn2: HttpRequestBuilder = {
-    http(s"GET account-home-start-no-activity-return-2")
-      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/true": String)
-      .check(status.is(303))
-      .check(saveCsrfToken())
-  }
 
   def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder = {
     http(s"POST account-home")
