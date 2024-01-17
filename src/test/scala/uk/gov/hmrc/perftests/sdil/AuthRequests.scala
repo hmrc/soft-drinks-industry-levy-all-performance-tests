@@ -26,7 +26,7 @@ object AuthRequests extends BaseRequest {
 
   val authWizUrl: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/gg-sign-in"
   val authSession: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/session"
-  val bearerTokenPattern =
+  val bearerTokenPattern: String =
     """<td data-session-id="authToken" style="word-break: break-all">
       |            <code style="border: none">([^"]+)</code>""".stripMargin
 
@@ -51,9 +51,9 @@ object AuthRequests extends BaseRequest {
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(303))
 
-  def createRegistrationsAuthSession(): HttpRequestBuilder = createAuthSession("${RegistrationsUTR}")
-  def createReturnsAuthSession(): HttpRequestBuilder = createAuthSession("${ReturnsUTR}")
-  def createVariationsAuthSession(): HttpRequestBuilder = createAuthSession("${VariationsUTR}")
+  def createRegistrationsAuthSession: HttpRequestBuilder = createAuthSession("${RegistrationsUTR}")
+  def createReturnsAuthSession: HttpRequestBuilder = createAuthSession("${ReturnsUTR}")
+  def createVariationsAuthSession: HttpRequestBuilder = createAuthSession("${VariationsUTR}")
 
   lazy val navigateToAuthSession: HttpRequestBuilder =
     http("Navigate to Auth Session page")

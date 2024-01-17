@@ -18,7 +18,7 @@ package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
-import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2}
+import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2, getAccountHomePageStartReturn2, getAccountHomePageStartReturn3, postAccountHomePageStartNoActivityReturn1}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests.{getCheckYourAnswersPage, getReturnSentPage, postCheckYourAnswersPage}
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
@@ -243,18 +243,22 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    resetRegistrations,
 //    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
-    getAccountHomePageStartNoActivityReturn1,
-    getAccountHomePageStartNoActivityReturn2,
+    getAccountHomePageStartReturn2,
 
-    getCheckYourAnswersPage,
-    postCheckYourAnswersPage,
+
+
+    getAccountHomePageStartReturn3,
+    postAccountHomePageStartNoActivityReturn1,
+//    getAccountHomePageStartNoActivityReturn2,
+
+//    getCheckYourAnswersPage,
+//    postCheckYourAnswersPage,
     getReturnSentPage,
 
     getAccountHomePage,
@@ -263,7 +267,8 @@ trait SDILVariationsJourneyRequests {
     postPage("select-change", "correctReturn", "correct-return/select"),
 
     getPage("correct-return/select"),
-    postPage("correct-return/select", "YEAR-2023-QUARTER-1", "correct-return/own-brands-packaged-at-own-sites"),
+    postPage2("correct-return/select", "value_0_0", "correct-return/own-brands-packaged-at-own-sites"),
+//    postPage("correct-return/select", "YEAR-2023-QUARTER-1", "correct-return/own-brands-packaged-at-own-sites"),
 
     getPage("correct-return/own-brands-packaged-at-own-sites"),
     postPage("correct-return/own-brands-packaged-at-own-sites", "true", "correct-return/how-many-own-brands-packaged-at-own-sites"),

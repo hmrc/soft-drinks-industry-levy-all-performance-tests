@@ -53,6 +53,15 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
 
+  def postPage2(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+    http(s"POST $url")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("id", body)
+      .check(status.is(303))
+      .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
+  }
+
   def postPackagingSiteDetailsPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
