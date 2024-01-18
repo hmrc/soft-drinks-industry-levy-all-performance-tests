@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createRegistrationsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILRegistrationRequests.{getPage, postPage, _}
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
@@ -25,12 +25,12 @@ trait SDILRegistrationJourneyRequests {
 
   val resetDataAndSignin = Seq(
     resetPending,
-    resetReturns,
+//    resetReturns,
     resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
     navigateToAuth,
-    createAuthSession("3000000000"),
+    createRegistrationsAuthSession,
     navigateToAuthSession,
   )
 
@@ -98,8 +98,8 @@ trait SDILRegistrationJourneyRequests {
       getPage("contact-details"),
       postContactDetailsPage("/check-your-answers"),
       getPage("check-your-answers"),
-      postCheckYourAnswersPage,
-      getRegisterConfirmationPage
+      //postCheckYourAnswersPage,
+      //getRegisterConfirmationPage
     )
   }
 

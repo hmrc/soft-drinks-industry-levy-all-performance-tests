@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ object AuthRequests extends BaseRequest {
 
   val authWizUrl: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/gg-sign-in"
   val authSession: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/session"
-  val bearerTokenPattern =
+  val bearerTokenPattern: String =
     """<td data-session-id="authToken" style="word-break: break-all">
       |            <code style="border: none">([^"]+)</code>""".stripMargin
 
@@ -37,7 +37,7 @@ object AuthRequests extends BaseRequest {
       .get(authWizUrl)
       .check(status.is(200))
 
-  def createAuthSession(utr: String = "0000000437"): HttpRequestBuilder =
+  def createAuthSession(utr: String): HttpRequestBuilder =
     http("Create Auth Session")
       .post(authWizUrl)
       .formParam("redirectionUrl", authSession)
@@ -50,6 +50,10 @@ object AuthRequests extends BaseRequest {
       .formParam("enrolment[0].taxIdentifier[0].value", utr)
       .formParam("enrolment[0].state", "Activated")
       .check(status.is(303))
+
+  def createRegistrationsAuthSession: HttpRequestBuilder = createAuthSession("${RegistrationsUTR}")
+  def createReturnsAuthSession: HttpRequestBuilder = createAuthSession("${ReturnsUTR}")
+  def createVariationsAuthSession: HttpRequestBuilder = createAuthSession("${VariationsUTR}")
 
   lazy val navigateToAuthSession: HttpRequestBuilder =
     http("Navigate to Auth Session page")

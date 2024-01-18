@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +17,20 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
-import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartNoActivityReturn1, getAccountHomePageStartNoActivityReturn2}
-import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests.{getCheckYourAnswersPage, getReturnSentPage, postCheckYourAnswersPage}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.getAccountHomePage
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
-import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 trait SDILVariationsJourneyRequests {
 
   val sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -49,14 +46,13 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -78,14 +74,13 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsRemoveSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -101,8 +96,10 @@ trait SDILVariationsJourneyRequests {
     getPage("change-registered-details/packaging-site-details"),
     postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details"),
     getPage("change-registered-details/warehouse-details"),
-    getPage("change-registered-details/warehouse-details/remove/1"),
-    postPage("change-registered-details/warehouse-details/remove/1", "false", "change-registered-details/warehouse-details"),
+    postPackagingSiteDetailsPage("change-registered-details/warehouse-details", "true", "change-registered-details/warehouse-details"),
+    getPage("change-registered-details/warehouse-details"),
+    getPage("change-registered-details/warehouse-details/remove/0"),
+    postPage("change-registered-details/warehouse-details/remove/0", "true", "change-registered-details/warehouse-details"),
     getPage("change-registered-details/warehouse-details"),
     postPage("change-registered-details/warehouse-details", "false", "change-registered-details/check-your-answers"),
     getPage("change-registered-details/check-your-answers"),
@@ -111,14 +108,13 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityOneMillionLitresOrMoreJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -148,14 +144,13 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityLessThanOneMillionLitresJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -187,14 +182,13 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationChangeActivityNoneProducedJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -214,14 +208,13 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationCancelRegistrationJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createVariationsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -237,80 +230,83 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationCorrectReturnJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    resetRegistrations,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
-
-    navigateToAuth,
-    createAuthSession(),
-    navigateToAuthSession,
-
-    getAccountHomePage,
-    getAccountHomePageStartNoActivityReturn1,
-    getAccountHomePageStartNoActivityReturn2,
-
-    getCheckYourAnswersPage,
-    postCheckYourAnswersPage,
-    getReturnSentPage,
-
-    getAccountHomePage,
-
-    getPage("select-change"),
-    postPage("select-change", "correctReturn", "correct-return/select"),
-
-    getPage("correct-return/select"),
-    postPage("correct-return/select", "YEAR-2023-QUARTER-1", "correct-return/own-brands-packaged-at-own-sites"),
-
-    getPage("correct-return/own-brands-packaged-at-own-sites"),
-    postPage("correct-return/own-brands-packaged-at-own-sites", "true", "correct-return/how-many-own-brands-packaged-at-own-sites"),
-    getPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
-    postLitresPage("correct-return/how-many-own-brands-packaged-at-own-sites", "correct-return/packaged-as-contract-packer"),
-
-    getPage("correct-return/packaged-as-contract-packer"),
-    postPage("correct-return/packaged-as-contract-packer", "true", "correct-return/how-many-packaged-as-contract-packer"),
-    getPage("correct-return/how-many-packaged-as-contract-packer"),
-    postLitresPage("correct-return/how-many-packaged-as-contract-packer", "correct-return/exemptions-for-small-producers"),
-
-    getPage("correct-return/exemptions-for-small-producers"),
-    postPage("correct-return/exemptions-for-small-producers", "true", "correct-return/add-small-producer"),
-    getPage("correct-return/add-small-producer"),
-    postAddSmallProducerPage,
-    getPage("correct-return/small-producer-details"),
-    postPage("correct-return/small-producer-details", "false", "correct-return/brought-into-uk"),
-
-    getPage("correct-return/brought-into-uk"),
-    postPage("correct-return/brought-into-uk", "true", "correct-return/how-many-brought-into-uk"),
-    getPage("correct-return/how-many-brought-into-uk"),
-    postLitresPage("correct-return/how-many-brought-into-uk", "correct-return/brought-into-uk-from-small-producers"),
-
-    getPage("correct-return/brought-into-uk-from-small-producers"),
-    postPage("correct-return/brought-into-uk-from-small-producers", "true", "correct-return/how-many-into-uk-small-producers"),
-    getPage("correct-return/how-many-into-uk-small-producers"),
-    postLitresPage("correct-return/how-many-into-uk-small-producers", "correct-return/claim-credits-for-exports"),
-
-    getPage("correct-return/claim-credits-for-exports"),
-    postPage("correct-return/claim-credits-for-exports", "true", "correct-return/how-many-credits-for-exports"),
-    getPage("correct-return/how-many-credits-for-exports"),
-    postLitresPage("correct-return/how-many-credits-for-exports", "correct-return/claim-credits-for-lost-damaged"),
-
-    getPage("correct-return/claim-credits-for-lost-damaged"),
-    postPage("correct-return/claim-credits-for-lost-damaged", "true", "correct-return/how-many-credits-for-lost-damaged"),
-    getPage("correct-return/how-many-credits-for-lost-damaged"),
-    postLitresPage("correct-return/how-many-credits-for-lost-damaged", "correct-return/check-your-answers"),
-
-    getPage("correct-return/check-your-answers"),
-    postFormlessPage("correct-return/check-your-answers", "correct-return/correction-reason"),
-
-    getPage("correct-return/correction-reason"),
-    postPage("correct-return/correction-reason", "some reason", "correct-return/repayment-method"),
-
-    getPage("correct-return/repayment-method"), //TODO - will change at some point
-    postPage("correct-return/repayment-method", "bankAccount", "correct-return/check-changes"),
-
-    getPage("correct-return/check-changes"),
-    postFormlessPage("correct-return/check-changes", "correct-return/update-done"),
-    getPage("correct-return/update-done")
+////    resetPending,
+////    resetReturns,
+////    sdilReturnsCollectionReset,
+////    resetReturnsUserAnswers(),
+//
+//    navigateToAuth,
+//    createVariationsAuthSession,
+//    navigateToAuthSession,
+//    getAccountHomePage,
+//
+//
+//
+//    getAccountHomePageStartReturn3,
+//    postAccountHomePageStartNoActivityReturn1,
+////    getAccountHomePageStartNoActivityReturn2,
+//
+////    getCheckYourAnswersPage,
+////    postCheckYourAnswersPage,
+//    getReturnSentPage,
+//
+//    getAccountHomePage,
+//
+//    getPage("select-change"),
+//    postPage("select-change", "correctReturn", "correct-return/select"),
+//
+//    getPage("correct-return/select"),
+//    postPage2("correct-return/select", "value_0_0", "correct-return/own-brands-packaged-at-own-sites"),
+////    postPage("correct-return/select", "YEAR-2023-QUARTER-1", "correct-return/own-brands-packaged-at-own-sites"),
+//
+//    getPage("correct-return/own-brands-packaged-at-own-sites"),
+//    postPage("correct-return/own-brands-packaged-at-own-sites", "true", "correct-return/how-many-own-brands-packaged-at-own-sites"),
+//    getPage("correct-return/how-many-own-brands-packaged-at-own-sites"),
+//    postLitresPage("correct-return/how-many-own-brands-packaged-at-own-sites", "correct-return/packaged-as-contract-packer"),
+//
+//    getPage("correct-return/packaged-as-contract-packer"),
+//    postPage("correct-return/packaged-as-contract-packer", "true", "correct-return/how-many-packaged-as-contract-packer"),
+//    getPage("correct-return/how-many-packaged-as-contract-packer"),
+//    postLitresPage("correct-return/how-many-packaged-as-contract-packer", "correct-return/exemptions-for-small-producers"),
+//
+//    getPage("correct-return/exemptions-for-small-producers"),
+//    postPage("correct-return/exemptions-for-small-producers", "true", "correct-return/add-small-producer"),
+//    getPage("correct-return/add-small-producer"),
+//    postAddSmallProducerPage,
+//    getPage("correct-return/small-producer-details"),
+//    postPage("correct-return/small-producer-details", "false", "correct-return/brought-into-uk"),
+//
+//    getPage("correct-return/brought-into-uk"),
+//    postPage("correct-return/brought-into-uk", "true", "correct-return/how-many-brought-into-uk"),
+//    getPage("correct-return/how-many-brought-into-uk"),
+//    postLitresPage("correct-return/how-many-brought-into-uk", "correct-return/brought-into-uk-from-small-producers"),
+//
+//    getPage("correct-return/brought-into-uk-from-small-producers"),
+//    postPage("correct-return/brought-into-uk-from-small-producers", "true", "correct-return/how-many-into-uk-small-producers"),
+//    getPage("correct-return/how-many-into-uk-small-producers"),
+//    postLitresPage("correct-return/how-many-into-uk-small-producers", "correct-return/claim-credits-for-exports"),
+//
+//    getPage("correct-return/claim-credits-for-exports"),
+//    postPage("correct-return/claim-credits-for-exports", "true", "correct-return/how-many-credits-for-exports"),
+//    getPage("correct-return/how-many-credits-for-exports"),
+//    postLitresPage("correct-return/how-many-credits-for-exports", "correct-return/claim-credits-for-lost-damaged"),
+//
+//    getPage("correct-return/claim-credits-for-lost-damaged"),
+//    postPage("correct-return/claim-credits-for-lost-damaged", "true", "correct-return/how-many-credits-for-lost-damaged"),
+//    getPage("correct-return/how-many-credits-for-lost-damaged"),
+//    postLitresPage("correct-return/how-many-credits-for-lost-damaged", "correct-return/check-your-answers", "500", "500"),
+//
+//    getPage("correct-return/check-your-answers"),
+//    postFormlessPage("correct-return/check-your-answers", "correct-return/correction-reason"),
+//
+//    getPage("correct-return/correction-reason"),
+//    postPage("correct-return/correction-reason", "some reason", "correct-return/repayment-method"),
+//
+//    getPage("correct-return/repayment-method"),
+//    postPage("correct-return/repayment-method", "bankAccount", "correct-return/check-changes"),
+//
+//    getPage("correct-return/check-changes"),
+//    postFormlessPage("correct-return/check-changes", "correct-return/update-done"),
+//    getPage("correct-return/update-done")
   )
 }

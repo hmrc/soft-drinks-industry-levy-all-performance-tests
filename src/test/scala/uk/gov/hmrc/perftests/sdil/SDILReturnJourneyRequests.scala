@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createReturnsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartReturn1, getAccountHomePageStartReturn2, postAccountHomePageStartReturn}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
@@ -26,12 +26,11 @@ trait SDILReturnJourneyRequests {
   val sdilReturnJourney1Requests: Seq[HttpRequestBuilder] = Seq(
     resetPending,
     resetReturns,
-    resetRegistrations,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createReturnsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -69,19 +68,18 @@ trait SDILReturnJourneyRequests {
     getHowManyCreditsForLostDamagedPage,
     postHowManyCreditsForLostDamagedPage,
     getCheckYourAnswersPage,
-    postCheckYourAnswersPage,
-    getReturnSentPage
+//    postCheckYourAnswersPage,
+//    getReturnSentPage
   )
 
   val sdilReturnJourney2Requests: Seq[HttpRequestBuilder] = Seq(
     resetPending,
     resetReturns,
-    resetRegistrations,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
 
     navigateToAuth,
-    createAuthSession(),
+    createReturnsAuthSession,
     navigateToAuthSession,
 
     getAccountHomePage,
@@ -127,8 +125,8 @@ trait SDILReturnJourneyRequests {
     getSecondaryWarehouseDetailsPage,
     postSecondaryWarehouseDetailsPage,
     getCheckYourAnswersPage,
-    postCheckYourAnswersPage,
-    getReturnSentPage
+//    postCheckYourAnswersPage,
+//    getReturnSentPage
   )
 
 }

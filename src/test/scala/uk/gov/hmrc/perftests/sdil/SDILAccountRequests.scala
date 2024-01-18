@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,13 @@ object SDILAccountRequests extends ServicesConfiguration {
       .check(saveCsrfToken())
   }
 
+  def getNextRequest: HttpRequestBuilder = {
+    http("GET account-home")
+      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/:isNilReturn": String)
+      .check(status.is(200))
+      .check(saveCsrfToken())
+  }
+
   def postAccountHomePageStartReturn: HttpRequestBuilder = {
     http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return": String)
@@ -55,20 +62,6 @@ object SDILAccountRequests extends ServicesConfiguration {
   def getAccountHomePageStartReturn2: HttpRequestBuilder = {
     http(s"GET account-home-start-return-2")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/false": String)
-      .check(status.is(303))
-      .check(saveCsrfToken())
-  }
-
-  def getAccountHomePageStartNoActivityReturn1: HttpRequestBuilder = {
-    http(s"GET account-home-start-no-activity-return")
-      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/true": String)
-      .check(status.is(303))
-      .check(saveCsrfToken())
-  }
-
-  def getAccountHomePageStartNoActivityReturn2: HttpRequestBuilder = {
-    http(s"GET account-home-start-no-activity-return-2")
-      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/true": String)
       .check(status.is(303))
       .check(saveCsrfToken())
   }
