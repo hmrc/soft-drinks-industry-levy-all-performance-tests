@@ -43,7 +43,7 @@ object SetupRequests extends BaseRequest {
 
   def resetReturns: HttpRequestBuilder = {
     http("GET reset-returns")
-      .get(s"$baseBackendUrl/$backendRoute/sdilReturnsCollectionReset": String)
+      .get(s"$baseBackendUrl/$backendRoute/reset-returns": String)
   }
 
   def resetRegistrations: HttpRequestBuilder = {
