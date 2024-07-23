@@ -35,4 +35,14 @@ trait BaseRequest extends ServicesConfiguration {
 
   def saveCookie(): CheckBuilder[HttpHeaderRegexCheckType, Response, String] =
     headerRegex("Set-Cookie", "mdtp=(.*)").optional.saveAs("cookie")
+
+  def absoluteRedirectTransform(baseUrl: String): (String => String) = {
+    redirectUrl: String => {
+      if (redirectUrl.startsWith("/")) {
+        baseUrl + redirectUrl
+      } else {
+        redirectUrl
+      }
+    }
+  }
 }
