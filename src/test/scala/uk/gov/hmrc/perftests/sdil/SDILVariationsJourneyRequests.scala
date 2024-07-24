@@ -25,10 +25,10 @@ import uk.gov.hmrc.perftests.sdil.SetupRequests.{resetPending, resetReturns, res
 trait SDILVariationsJourneyRequests {
 
   val sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
     createVariationsAuthSession,
@@ -47,10 +47,10 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-    resetPending,
-    resetReturns,
-    sdilReturnsCollectionReset,
-    resetReturnsUserAnswers(),
+//    resetPending,
+//    resetReturns,
+//    sdilReturnsCollectionReset,
+//    resetReturnsUserAnswers(),
 
     navigateToAuth,
     createVariationsAuthSession,
