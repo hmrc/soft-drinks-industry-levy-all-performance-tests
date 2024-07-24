@@ -47,10 +47,10 @@ trait SDILVariationsJourneyRequests {
   )
 
   val sdilVariationUpdateRegisteredDetailsUpdateSiteJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-//    resetPending,
-//    resetReturns,
-//    sdilReturnsCollectionReset,
-//    resetReturnsUserAnswers(),
+    resetPending,
+    resetReturns,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
 
     navigateToAuth,
     createVariationsAuthSession,
