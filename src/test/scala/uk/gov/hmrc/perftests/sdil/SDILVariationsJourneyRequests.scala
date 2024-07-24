@@ -20,14 +20,15 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.getAccountHomePage
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
+import uk.gov.hmrc.perftests.sdil.SetupRequests.{resetPending, resetReturns, resetReturnsUserAnswers, sdilReturnsCollectionReset}
 
 trait SDILVariationsJourneyRequests {
 
   val sdilVariationUpdateRegisteredDetailsUpdateContactJourneyRequests: Seq[HttpRequestBuilder] = Seq(
-//    resetPending,
-//    resetReturns,
-//    sdilReturnsCollectionReset,
-//    resetReturnsUserAnswers(),
+    resetPending,
+    resetReturns,
+    sdilReturnsCollectionReset,
+    resetReturnsUserAnswers(),
 
     navigateToAuth,
     createVariationsAuthSession,
