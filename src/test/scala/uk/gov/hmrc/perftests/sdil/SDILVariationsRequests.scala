@@ -157,6 +157,32 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
 
+  def postLitresPageNxtPagePackagingSites(url: String, highBand: String = "100", lowBand: String = "100"): HttpRequestBuilder = {
+    http(s"POST $url")
+      .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
+      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("litres.lowBand", lowBand)
+      .formParam("litres.highBand", highBand)
+      .check(status.is(303))
+      .check(header("Location").in(s"/$frontEndRoute/change-activity/packaging-site-details": String,
+        s"/$frontEndRoute/change-activity/pack-at-business-address": String))
+      .check(header("Location").saveAs("updatePackagingSitesUrl"))
+  }
+
+  def getAddPackingSiteIfRequiredOrNoUpdateRequests: Seq[HttpRequestBuilder] = {
+    if (hasPackagingSites(s"$$updatePackagingSitesUrl")) {
+      Seq(
+        getPage("change-activity/packaging-site-details"),
+        postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details")
+      )
+    } else Seq(
+      getPage("change-activity/pack-at-business-address"),
+      postPage("change-activity/pack-at-business-address", "true", "change-activity/packaging-site-details"),
+      getPage("change-activity/packaging-site-details"),
+      postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details")
+    )
+  }
+
   def postContactDetailsAddPage(redirectUrl: String = ""): HttpRequestBuilder = {
     http("POST change-registered-details/contact-details-add")
       .post(s"$baseFrontEndUrl/$frontEndRoute/change-registered-details/contact-details-add": String)
