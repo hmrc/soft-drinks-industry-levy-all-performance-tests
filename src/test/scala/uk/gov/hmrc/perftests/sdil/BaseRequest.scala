@@ -45,4 +45,8 @@ trait BaseRequest extends ServicesConfiguration {
       }
     }
   }
+
+  def hasPackagingSites(redirectUrl: String): Boolean = {
+      redirectUrl.endsWith("/packaging-site-details")
+  }
 }

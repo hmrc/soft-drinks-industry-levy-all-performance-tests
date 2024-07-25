@@ -20,7 +20,8 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
-import uk.gov.hmrc.perftests.sdil.AuthRequests.saveCsrfToken
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{hasPackagingSites, saveCsrfToken}
+import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.getPage
 
 import java.time.LocalDate
 
@@ -88,13 +89,42 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/contact-details-add": String))
   }
 
+  def getAddPackingSiteRequests: Seq[HttpRequestBuilder] = {
+    if(hasPackagingSites(s"$$changeSitesUrl")) {
+      Seq(
+        getPage("change-registered-details/packaging-site-details"),
+        postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
+        getPage("change-registered-details/packaging-site-details"),
+        postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details")
+      )
+    } else Seq.empty
+  }
+
+  def getRemovePackingSiteRequests: Seq[HttpRequestBuilder] = {
+    if (hasPackagingSites(s"$$changeSitesUrl")) {
+        Seq(
+          getPage("change-registered-details/packaging-site-details"),
+          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
+          getPage("change-registered-details/packaging-site-details"),
+          getPage ("change-registered-details/packaging-site-details/remove/0"),
+          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true", "change-registered-details/packaging-site-details"),
+          getPage("change-registered-details/packaging-site-details"),
+          postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details")
+        )
+      } else {
+      Seq.empty
+    }
+  }
+
   def postChangeSitesOnlyPage(url: String): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .formParam("value[0]", "sites")
       .check(status.is(303))
-      .check(header("Location").is(s"/$frontEndRoute/change-registered-details/packaging-site-details": String))
+      .check(header("Location").in(s"/$frontEndRoute/change-registered-details/packaging-site-details": String,
+        s"/$frontEndRoute/change-registered-details/warehouse-details": String))
+      .check(header("Location").saveAs("changeSitesUrl"))
   }
 
   def postChangeBusinessDetailsOnlyPage(url: String): HttpRequestBuilder = {

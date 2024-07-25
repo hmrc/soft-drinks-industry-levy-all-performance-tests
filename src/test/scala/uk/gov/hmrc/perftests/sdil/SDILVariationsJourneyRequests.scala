@@ -60,11 +60,8 @@ trait SDILVariationsJourneyRequests {
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
-    postChangeSitesOnlyPage("change-registered-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details"),
+    postChangeSitesOnlyPage("change-registered-details")
+  ) ++ getAddPackingSiteRequests ++ Seq(
     getPage("change-registered-details/warehouse-details"),
     postPageRedirectToAddressLookup("change-registered-details/warehouse-details", "true", "secondary-warehouses"),
     getPage("change-registered-details/warehouse-details"),
@@ -88,14 +85,8 @@ trait SDILVariationsJourneyRequests {
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
-    postChangeSitesOnlyPage("change-registered-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details/remove/0"),
-    postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true", "change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details"),
+    postChangeSitesOnlyPage("change-registered-details")
+  ) ++ getRemovePackingSiteRequests ++ Seq(
     getPage("change-registered-details/warehouse-details"),
     postPackagingSiteDetailsPage("change-registered-details/warehouse-details", "true", "change-registered-details/warehouse-details"),
     getPage("change-registered-details/warehouse-details"),
