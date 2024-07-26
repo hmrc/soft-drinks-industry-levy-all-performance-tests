@@ -20,7 +20,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
-import uk.gov.hmrc.perftests.sdil.AuthRequests.saveCsrfToken
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{absoluteRedirectTransform, saveCsrfToken}
 
 object SDILAccountRequests extends ServicesConfiguration {
 
@@ -57,11 +57,12 @@ object SDILAccountRequests extends ServicesConfiguration {
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
       .check(status.is(303))
       .check(saveCsrfToken())
+      .check(header("Location").transform(absoluteRedirectTransform(baseReturnsFrontEndUrl)).saveAs("startReturnUrl"))
   }
 
   def getAccountHomePageStartReturn2: HttpRequestBuilder = {
     http(s"GET account-home-start-return-2")
-      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/submit-return/year/2023/quarter/1/nil-return/false": String)
+      .get("${startReturnUrl}")
       .check(status.is(303))
       .check(saveCsrfToken())
   }

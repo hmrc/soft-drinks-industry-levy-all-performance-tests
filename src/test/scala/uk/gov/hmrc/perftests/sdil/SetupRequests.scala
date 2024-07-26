@@ -23,7 +23,7 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 object SetupRequests extends BaseRequest {
 
   val baseBackendUrl: String = baseUrlFor("soft-drinks-industry-levy")
-  val backendRoute: String = "soft-drinks-industry-levy/test-only"
+  val backendRoute: String = "/test-only"
 
   val baseReturnsFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val returnsFrontEndRoute: String = "soft-drinks-industry-levy-returns-frontend"

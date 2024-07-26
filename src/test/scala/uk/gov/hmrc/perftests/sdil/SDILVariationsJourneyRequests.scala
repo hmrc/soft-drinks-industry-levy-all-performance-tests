@@ -20,6 +20,7 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.getAccountHomePage
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
+import uk.gov.hmrc.perftests.sdil.SetupRequests.{resetPending, resetReturns, resetReturnsUserAnswers, sdilReturnsCollectionReset}
 
 trait SDILVariationsJourneyRequests {
 
@@ -59,11 +60,8 @@ trait SDILVariationsJourneyRequests {
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
-    postChangeSitesOnlyPage("change-registered-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details"),
+    postChangeSitesOnlyPage("change-registered-details")
+  ) ++ getAddPackingSiteRequests ++ Seq(
     getPage("change-registered-details/warehouse-details"),
     postPageRedirectToAddressLookup("change-registered-details/warehouse-details", "true", "secondary-warehouses"),
     getPage("change-registered-details/warehouse-details"),
@@ -87,14 +85,8 @@ trait SDILVariationsJourneyRequests {
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
     getPage("change-registered-details"),
-    postChangeSitesOnlyPage("change-registered-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details/remove/0"),
-    postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true", "change-registered-details/packaging-site-details"),
-    getPage("change-registered-details/packaging-site-details"),
-    postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details"),
+    postChangeSitesOnlyPage("change-registered-details")
+  ) ++ getRemovePackingSiteRequests ++ Seq(
     getPage("change-registered-details/warehouse-details"),
     postPackagingSiteDetailsPage("change-registered-details/warehouse-details", "true", "change-registered-details/warehouse-details"),
     getPage("change-registered-details/warehouse-details"),
@@ -133,9 +125,8 @@ trait SDILVariationsJourneyRequests {
     getPage("change-activity/imports"),
     postPage("change-activity/imports", "true", "change-activity/how-many-imports-next-12-months"),
     getPage("change-activity/how-many-imports-next-12-months"),
-    postLitresPage("change-activity/how-many-imports-next-12-months", "change-activity/packaging-site-details"),
-    getPage("change-activity/packaging-site-details"),
-    postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details"),
+    postLitresPageNxtPagePackagingSites("change-activity/how-many-imports-next-12-months")
+  ) ++ getAddPackingSiteIfRequiredOrNoUpdateRequests ++ Seq(
     getPage("change-activity/secondary-warehouse-details"),
     postPage("change-activity/secondary-warehouse-details", "false", "change-activity/check-your-answers"),
     getPage("change-activity/check-your-answers"),
@@ -171,9 +162,8 @@ trait SDILVariationsJourneyRequests {
     getPage("change-activity/imports"),
     postPage("change-activity/imports", "true", "change-activity/how-many-imports-next-12-months"),
     getPage("change-activity/how-many-imports-next-12-months"),
-    postLitresPage("change-activity/how-many-imports-next-12-months", "change-activity/packaging-site-details"),
-    getPage("change-activity/packaging-site-details"),
-    postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details"),
+    postLitresPageNxtPagePackagingSites("change-activity/how-many-imports-next-12-months")
+  ) ++ getAddPackingSiteIfRequiredOrNoUpdateRequests ++ Seq(
     getPage("change-activity/secondary-warehouse-details"),
     postPage("change-activity/secondary-warehouse-details", "false", "change-activity/check-your-answers"),
     getPage("change-activity/check-your-answers"),
@@ -203,7 +193,7 @@ trait SDILVariationsJourneyRequests {
     getPage("change-activity/imports"),
     postPage("change-activity/imports", "true", "change-activity/how-many-imports-next-12-months"),
     getPage("change-activity/how-many-imports-next-12-months"),
-    postLitresPage("change-activity/how-many-imports-next-12-months", "change-activity/packaging-site-details"),
+    postLitresPageNxtPagePackagingSites("change-activity/how-many-imports-next-12-months"),
     getPage("change-activity/suggest-deregistration")
   )
 

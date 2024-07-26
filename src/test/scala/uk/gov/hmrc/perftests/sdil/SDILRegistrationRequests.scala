@@ -62,7 +62,6 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   }
 
   def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
-    println("here1")
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
@@ -73,7 +72,6 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   }
 
   def getPackagingSiteNamePage(): HttpRequestBuilder = {
-    println("here2")
     http(s"POST packaging-site-name")
       .get(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
       .check(status.is(303))
@@ -121,12 +119,17 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   }
 
   def postStartDatePage(redirectUrl: String): HttpRequestBuilder = {
+    val fourDaysAgo = LocalDate.now().minusDays(10)
+    val startDay = fourDaysAgo.getDayOfMonth.toString
+    val startMonth = fourDaysAgo.getMonthValue.toString
+    val startYear = fourDaysAgo.getYear.toString
+
     http("POST start-date")
       .post(s"$baseFrontEndUrl/$frontEndRoute/start-date": String)
       .formParam("csrfToken", s"$${csrfToken}")
-      .formParam("startDate.day", (LocalDate.now().minusDays(4).getDayOfMonth).toString)
-      .formParam("startDate.month", (LocalDate.now().minusDays(4).getMonthValue).toString)
-      .formParam("startDate.year", (LocalDate.now().minusDays(4).getYear).toString)
+      .formParam("startDate.day", startDay)
+      .formParam("startDate.month", startMonth)
+      .formParam("startDate.year", startYear)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
   }
