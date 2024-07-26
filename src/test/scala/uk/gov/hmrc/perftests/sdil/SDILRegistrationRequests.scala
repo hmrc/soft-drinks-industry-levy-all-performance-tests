@@ -62,7 +62,6 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   }
 
   def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
-    println("here1")
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"$${csrfToken}")
@@ -73,7 +72,6 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   }
 
   def getPackagingSiteNamePage(): HttpRequestBuilder = {
-    println("here2")
     http(s"POST packaging-site-name")
       .get(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
       .check(status.is(303))
