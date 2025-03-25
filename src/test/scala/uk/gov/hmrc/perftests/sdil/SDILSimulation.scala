@@ -35,9 +35,6 @@ class SDILSimulation extends PerformanceTestRunner
   setup("sdil-registration-full-allYes-noneProducer", "SDIL Registrations for none producer answers yes to all")
     .withRequests(sdilRegisterAnswerYesToAllForNoneProducerJourneyRequests: _*)
 
-  setup("sdil-returns-journey-1", "SDIL Returns journey 1")
-    .withRequests(sdilReturnJourney1Requests:_*
-  )
   setup("sdil-returns-journey-2", "SDIL Returns journey 2")
     .withRequests(sdilReturnJourney2Requests:_*
   )
