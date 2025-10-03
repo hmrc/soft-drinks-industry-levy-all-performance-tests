@@ -47,7 +47,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
   }
@@ -55,7 +55,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
@@ -64,14 +64,14 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
       .check(header("Location").saveAs("addressOffRampUrl"))
   }
 
-  def getPackagingSiteNamePage(): HttpRequestBuilder = {
+  def getPackagingSiteNamePage: HttpRequestBuilder = {
     http(s"POST packaging-site-name")
       .get(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
       .check(status.is(303))
@@ -82,15 +82,15 @@ object SDILRegistrationRequests extends ServicesConfiguration {
     println("here3")
     http(s"POST packaging-site-name")
       .post(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("packagingSiteName", "pSiteName")
       .check(status.is(303))
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
   }
 
   def getAddressRampOffPage(redirectUrl: String): HttpRequestBuilder = {
-    http(s"GET $${addressOffRampUrl}")
-      .get(s"$${addressOffRampUrl}": String)
+    http(s"GET #{addressOffRampUrl}")
+      .get(s"#{addressOffRampUrl}": String)
       .check(status.is(303))
       .check(saveCsrfToken())
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
@@ -99,7 +99,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   def postLitresPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("lowBand", "100")
       .formParam("highBand", "100")
       .check(status.is(303))
@@ -109,7 +109,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   def postContactDetailsPage(redirectUrl: String = ""): HttpRequestBuilder = {
     http("POST contact-details")
       .post(s"$baseFrontEndUrl/$frontEndRoute/contact-details": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("fullName", "Some Name")
       .formParam("position", "Manager")
       .formParam("phoneNumber", "01234567890")
@@ -126,7 +126,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
 
     http("POST start-date")
       .post(s"$baseFrontEndUrl/$frontEndRoute/start-date": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("startDate.day", startDay)
       .formParam("startDate.month", startMonth)
       .formParam("startDate.year", startYear)
@@ -137,7 +137,7 @@ object SDILRegistrationRequests extends ServicesConfiguration {
   def postCheckYourAnswersPage: HttpRequestBuilder = {
     http("POST check-your-anwers")
       .post(s"$baseFrontEndUrl/$frontEndRoute/check-your-answers": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/registration-confirmation": String))
   }

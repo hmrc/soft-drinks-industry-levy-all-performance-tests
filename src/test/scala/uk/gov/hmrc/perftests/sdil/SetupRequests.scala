@@ -56,7 +56,7 @@ object SetupRequests extends BaseRequest {
       .get(s"$baseBackendUrl/$backendRoute/sdilReturnsCollectionReset": String)
   }
 
-  def resetReturnsUserAnswers(sdilRef: String = "${SDILRef}"): HttpRequestBuilder = {
+  def resetReturnsUserAnswers(sdilRef: String = "#{SDILRef}"): HttpRequestBuilder = {
     http(s"GET user-answers $sdilRef")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/test-only/user-answers/$sdilRef": String)
   }

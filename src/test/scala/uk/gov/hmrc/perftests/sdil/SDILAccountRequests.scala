@@ -47,7 +47,7 @@ object SDILAccountRequests extends ServicesConfiguration {
   def postAccountHomePageStartReturn: HttpRequestBuilder = {
     http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
   }
@@ -62,7 +62,7 @@ object SDILAccountRequests extends ServicesConfiguration {
 
   def getAccountHomePageStartReturn2: HttpRequestBuilder = {
     http(s"GET account-home-start-return-2")
-      .get("${startReturnUrl}")
+      .get("#{startReturnUrl}")
       .check(status.is(303))
       .check(saveCsrfToken())
   }
@@ -70,7 +70,7 @@ object SDILAccountRequests extends ServicesConfiguration {
   def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder = {
     http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/make-a-change": String)
-      //.formParam("csrfToken", s"$${csrfToken}")
+      //.formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
   }

@@ -17,13 +17,13 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{createAuthSession, createRegistrationsAuthSession, navigateToAuth, navigateToAuthSession}
-import uk.gov.hmrc.perftests.sdil.SDILRegistrationRequests.{getPage, postPage, _}
+import uk.gov.hmrc.perftests.sdil.AuthRequests.{createRegistrationsAuthSession, navigateToAuth, navigateToAuthSession}
+import uk.gov.hmrc.perftests.sdil.SDILRegistrationRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 trait SDILRegistrationJourneyRequests {
 
-  val resetDataAndSignin = Seq(
+  val resetDataAndSignin: Seq[HttpRequestBuilder] = Seq(
     resetPending,
 //    resetReturns,
     resetRegistrations,
@@ -103,8 +103,8 @@ trait SDILRegistrationJourneyRequests {
     )
   }
 
-  val sdilRegisterAnswerYesToAllForLargeProducerJourneyRequests = sdilRegisterAnswerYesToAllForGivenProducerTypeJourneyRequests("large")
-  val sdilRegisterAnswerYesToAllForSmallProducerJourneyRequests = sdilRegisterAnswerYesToAllForGivenProducerTypeJourneyRequests("small")
-  val sdilRegisterAnswerYesToAllForNoneProducerJourneyRequests = sdilRegisterAnswerYesToAllForGivenProducerTypeJourneyRequests("none")
+  val sdilRegisterAnswerYesToAllForLargeProducerJourneyRequests: Seq[HttpRequestBuilder] = sdilRegisterAnswerYesToAllForGivenProducerTypeJourneyRequests("large")
+  val sdilRegisterAnswerYesToAllForSmallProducerJourneyRequests: Seq[HttpRequestBuilder] = sdilRegisterAnswerYesToAllForGivenProducerTypeJourneyRequests("small")
+  val sdilRegisterAnswerYesToAllForNoneProducerJourneyRequests: Seq[HttpRequestBuilder] = sdilRegisterAnswerYesToAllForGivenProducerTypeJourneyRequests("none")
 
 }

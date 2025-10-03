@@ -30,13 +30,13 @@ trait BaseRequest extends ServicesConfiguration {
 
   val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)""""
 
-  def saveCsrfToken(): CheckBuilder[RegexCheckType, String, String] =
+  def saveCsrfToken(): CheckBuilder[RegexCheckType, String] =
     regex(_ => csrfPattern).optional.saveAs("csrfToken")
 
-  def saveCookie(): CheckBuilder[HttpHeaderRegexCheckType, Response, String] =
+  def saveCookie(): CheckBuilder[HttpHeaderRegexCheckType, Response] =
     headerRegex("Set-Cookie", "mdtp=(.*)").optional.saveAs("cookie")
 
-  def absoluteRedirectTransform(baseUrl: String): (String => String) = {
+  def absoluteRedirectTransform(baseUrl: String): String => String = {
     redirectUrl: String => {
       if (redirectUrl.startsWith("/")) {
         baseUrl + redirectUrl
