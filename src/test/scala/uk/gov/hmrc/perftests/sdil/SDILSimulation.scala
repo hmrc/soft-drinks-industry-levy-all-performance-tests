@@ -16,12 +16,7 @@
 
 package uk.gov.hmrc.perftests.sdil
 
-import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.sdil.AuthRequests._
-import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
-import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.{getPage, postCancelDatePage, postContactDetailsAddPage, postFormlessPage, postLitresPage, postPage}
-import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 class SDILSimulation extends PerformanceTestRunner
   with SDILRegistrationJourneyRequests

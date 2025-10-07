@@ -21,6 +21,7 @@ import uk.gov.hmrc.perftests.sdil.AuthRequests.{createReturnsAuthSession, naviga
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.{getAccountHomePage, getAccountHomePageStartReturn1, getAccountHomePageStartReturn2}
 import uk.gov.hmrc.perftests.sdil.SDILReturnsRequests._
 import uk.gov.hmrc.perftests.sdil.SetupRequests._
+
 trait SDILReturnJourneyRequests {
 
   val sdilReturnJourney1Requests: Seq[HttpRequestBuilder] = Seq(

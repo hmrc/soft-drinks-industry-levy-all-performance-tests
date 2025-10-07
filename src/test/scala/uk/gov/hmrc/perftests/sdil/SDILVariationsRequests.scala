@@ -21,7 +21,6 @@ import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{hasPackagingSites, saveCsrfToken}
-import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests.getPage
 
 import java.time.LocalDate
 
@@ -40,7 +39,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
@@ -48,7 +47,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
@@ -57,16 +56,16 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postPage2(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("id", body)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
   }
 
-  def postPackagingSiteDetailsPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postPackagingSiteDetailsPage(url: String, body: String): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
   }
@@ -74,7 +73,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp/$redirectUrl(.*)": String))
@@ -83,17 +82,17 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postChangeContactDetailsOnlyPage(url: String): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[1]", "contactDetails")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/contact-details-add": String))
   }
 
   def getAddPackingSiteRequests: Seq[HttpRequestBuilder] = {
-    if(hasPackagingSites(s"$$changeSitesUrl")) {
+    if(hasPackagingSites(s"#changeSitesUrl")) {
       Seq(
         getPage("change-registered-details/packaging-site-details"),
-        postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
+        postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true"),
         getPage("change-registered-details/packaging-site-details"),
         postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details")
       )
@@ -101,13 +100,13 @@ object SDILVariationsRequests extends ServicesConfiguration {
   }
 
   def getRemovePackingSiteRequests: Seq[HttpRequestBuilder] = {
-    if (hasPackagingSites(s"$$changeSitesUrl")) {
+    if (hasPackagingSites(s"#changeSitesUrl")) {
         Seq(
           getPage("change-registered-details/packaging-site-details"),
-          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true", "change-registered-details/packaging-site-details"),
+          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true"),
           getPage("change-registered-details/packaging-site-details"),
           getPage ("change-registered-details/packaging-site-details/remove/0"),
-          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true", "change-registered-details/packaging-site-details"),
+          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true"),
           getPage("change-registered-details/packaging-site-details"),
           postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details")
         )
@@ -119,7 +118,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postChangeSitesOnlyPage(url: String): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[0]", "sites")
       .check(status.is(303))
       .check(header("Location").in(s"/$frontEndRoute/change-registered-details/packaging-site-details": String,
@@ -130,7 +129,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postChangeBusinessDetailsOnlyPage(url: String): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[2]", "businessDetails")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/": String))
@@ -139,7 +138,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postChangeAllPage(url: String): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[0]", "sites")
       .formParam("value[1]", "contactDetails")
       .formParam("value[2]", "businessDetails")
@@ -150,7 +149,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postLitresPage(url: String, redirectUrl: String = "", highBand: String = "100", lowBand: String = "100"): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("litres.lowBand", lowBand)
       .formParam("litres.highBand", highBand)
       .check(status.is(303))
@@ -160,7 +159,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postLitresPageNxtPagePackagingSites(url: String, highBand: String = "100", lowBand: String = "100"): HttpRequestBuilder = {
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("litres.lowBand", lowBand)
       .formParam("litres.highBand", highBand)
       .check(status.is(303))
@@ -170,7 +169,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   }
 
   def getAddPackingSiteIfRequiredOrNoUpdateRequests: Seq[HttpRequestBuilder] = {
-    if (hasPackagingSites(s"$$updatePackagingSitesUrl")) {
+    if (hasPackagingSites(s"#updatePackagingSitesUrl")) {
       Seq(
         getPage("change-activity/packaging-site-details"),
         postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details")
@@ -186,7 +185,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postContactDetailsAddPage(redirectUrl: String = ""): HttpRequestBuilder = {
     http("POST change-registered-details/contact-details-add")
       .post(s"$baseFrontEndUrl/$frontEndRoute/change-registered-details/contact-details-add": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("fullName", "Some Name")
       .formParam("position", "Manager")
       .formParam("phoneNumber", "01234567890")
@@ -198,7 +197,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postCancelDatePage: HttpRequestBuilder = {
     http("POST cancel-registration/date")
       .post(s"$baseFrontEndUrl/$frontEndRoute/cancel-registration/date": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("cancelRegistrationDate.day", (LocalDate.now().plusDays(2).getDayOfMonth).toString)
       .formParam("cancelRegistrationDate.month", (LocalDate.now().plusDays(2).getMonthValue).toString)
       .formParam("cancelRegistrationDate.year", (LocalDate.now().plusDays(2).getYear).toString)
@@ -209,7 +208,7 @@ object SDILVariationsRequests extends ServicesConfiguration {
   def postAddSmallProducerPage: HttpRequestBuilder = {
     http("POST add-small-producer")
       .post(s"$baseFrontEndUrl/$frontEndRoute/correct-return/add-small-producer": String)
-      .formParam("csrfToken", s"$${csrfToken}")
+      .formParam("csrfToken", s"#{csrfToken}")
       .formParam("producerName", "Fake Producer")
       .formParam("referenceNumber", "XZSDIL000000234")
       .formParam("litres.lowBand", "1000")

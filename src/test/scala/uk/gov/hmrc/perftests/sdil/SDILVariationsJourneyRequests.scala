@@ -20,7 +20,6 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.sdil.AuthRequests.{createVariationsAuthSession, navigateToAuth, navigateToAuthSession}
 import uk.gov.hmrc.perftests.sdil.SDILAccountRequests.getAccountHomePage
 import uk.gov.hmrc.perftests.sdil.SDILVariationsRequests._
-import uk.gov.hmrc.perftests.sdil.SetupRequests.{resetPending, resetReturns, resetReturnsUserAnswers, sdilReturnsCollectionReset}
 
 trait SDILVariationsJourneyRequests {
 
@@ -88,7 +87,7 @@ trait SDILVariationsJourneyRequests {
     postChangeSitesOnlyPage("change-registered-details")
   ) ++ getRemovePackingSiteRequests ++ Seq(
     getPage("change-registered-details/warehouse-details"),
-    postPackagingSiteDetailsPage("change-registered-details/warehouse-details", "true", "change-registered-details/warehouse-details"),
+    postPackagingSiteDetailsPage("change-registered-details/warehouse-details", "true"),
     getPage("change-registered-details/warehouse-details"),
     getPage("change-registered-details/warehouse-details/remove/0"),
     postPage("change-registered-details/warehouse-details/remove/0", "true", "change-registered-details/warehouse-details"),
