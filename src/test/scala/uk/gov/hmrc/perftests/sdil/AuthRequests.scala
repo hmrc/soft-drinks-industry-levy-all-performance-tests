@@ -24,13 +24,14 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 
 object AuthRequests extends BaseRequest {
 
-  val authWizUrl: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/gg-sign-in"
-  val authSession: String = baseUrlFor("auth-login-stub") + "/auth-login-stub/session"
+  val authWizUrl: String         = baseUrlFor("auth-login-stub") + "/auth-login-stub/gg-sign-in"
+  val authSession: String        = baseUrlFor("auth-login-stub") + "/auth-login-stub/session"
   val bearerTokenPattern: String =
     """<td data-session-id="authToken" style="word-break: break-all">
       |            <code style="border: none">([^"]+)</code>""".stripMargin
 
-  def saveBearerTokenFromBody(): CheckBuilder[RegexCheckType, String] = regex(_ => bearerTokenPattern).saveAs("bearerToken")
+  def saveBearerTokenFromBody(): CheckBuilder[RegexCheckType, String] =
+    regex(_ => bearerTokenPattern).saveAs("bearerToken")
 
   lazy val navigateToAuth: HttpRequestBuilder =
     http("Navigate to Auth wizard")
@@ -52,8 +53,8 @@ object AuthRequests extends BaseRequest {
       .check(status.is(303))
 
   def createRegistrationsAuthSession: HttpRequestBuilder = createAuthSession("#{RegistrationsUTR}")
-  def createReturnsAuthSession: HttpRequestBuilder = createAuthSession("#{ReturnsUTR}")
-  def createVariationsAuthSession: HttpRequestBuilder = createAuthSession("#{VariationsUTR}")
+  def createReturnsAuthSession: HttpRequestBuilder       = createAuthSession("#{ReturnsUTR}")
+  def createVariationsAuthSession: HttpRequestBuilder    = createAuthSession("#{VariationsUTR}")
 
   lazy val navigateToAuthSession: HttpRequestBuilder =
     http("Navigate to Auth Session page")

@@ -27,115 +27,116 @@ import java.time.LocalDate
 object SDILVariationsRequests extends ServicesConfiguration {
 
   val baseFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-variations-frontend")
-  val frontEndRoute: String = "soft-drinks-industry-levy-variations-frontend"
+  val frontEndRoute: String   = "soft-drinks-industry-levy-variations-frontend"
 
-  def getPage(url: String): HttpRequestBuilder = {
+  def getPage(url: String): HttpRequestBuilder =
     http(s"GET $url")
       .get(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .check(status.is(200))
       .check(saveCsrfToken())
-  }
 
-  def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
-  }
 
-  def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
-  }
 
-  def postPage2(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postPage2(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("id", body)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
-  }
 
-  def postPackagingSiteDetailsPage(url: String, body: String): HttpRequestBuilder = {
+  def postPackagingSiteDetailsPage(url: String, body: String): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
-  }
 
-  def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp/$redirectUrl(.*)": String))
-  }
 
-  def postChangeContactDetailsOnlyPage(url: String): HttpRequestBuilder = {
+  def postChangeContactDetailsOnlyPage(url: String): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[1]", "contactDetails")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/contact-details-add": String))
-  }
 
-  def getAddPackingSiteRequests: Seq[HttpRequestBuilder] = {
-    if(hasPackagingSites(s"#changeSitesUrl")) {
+  def getAddPackingSiteRequests: Seq[HttpRequestBuilder] =
+    if (hasPackagingSites(s"#changeSitesUrl")) {
       Seq(
         getPage("change-registered-details/packaging-site-details"),
         postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true"),
         getPage("change-registered-details/packaging-site-details"),
-        postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details")
+        postPage(
+          "change-registered-details/packaging-site-details",
+          "false",
+          "change-registered-details/warehouse-details"
+        )
       )
     } else Seq.empty
-  }
 
-  def getRemovePackingSiteRequests: Seq[HttpRequestBuilder] = {
+  def getRemovePackingSiteRequests: Seq[HttpRequestBuilder] =
     if (hasPackagingSites(s"#changeSitesUrl")) {
-        Seq(
-          getPage("change-registered-details/packaging-site-details"),
-          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true"),
-          getPage("change-registered-details/packaging-site-details"),
-          getPage ("change-registered-details/packaging-site-details/remove/0"),
-          postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true"),
-          getPage("change-registered-details/packaging-site-details"),
-          postPage("change-registered-details/packaging-site-details", "false", "change-registered-details/warehouse-details")
+      Seq(
+        getPage("change-registered-details/packaging-site-details"),
+        postPackagingSiteDetailsPage("change-registered-details/packaging-site-details", "true"),
+        getPage("change-registered-details/packaging-site-details"),
+        getPage("change-registered-details/packaging-site-details/remove/0"),
+        postPackagingSiteDetailsPage("change-registered-details/packaging-site-details/remove/0", "true"),
+        getPage("change-registered-details/packaging-site-details"),
+        postPage(
+          "change-registered-details/packaging-site-details",
+          "false",
+          "change-registered-details/warehouse-details"
         )
-      } else {
+      )
+    } else {
       Seq.empty
     }
-  }
 
-  def postChangeSitesOnlyPage(url: String): HttpRequestBuilder = {
+  def postChangeSitesOnlyPage(url: String): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[0]", "sites")
       .check(status.is(303))
-      .check(header("Location").in(s"/$frontEndRoute/change-registered-details/packaging-site-details": String,
-        s"/$frontEndRoute/change-registered-details/warehouse-details": String))
+      .check(
+        header("Location").in(
+          s"/$frontEndRoute/change-registered-details/packaging-site-details": String,
+          s"/$frontEndRoute/change-registered-details/warehouse-details": String
+        )
+      )
       .check(header("Location").saveAs("changeSitesUrl"))
-  }
 
-  def postChangeBusinessDetailsOnlyPage(url: String): HttpRequestBuilder = {
+  def postChangeBusinessDetailsOnlyPage(url: String): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value[2]", "businessDetails")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/": String))
-  }
 
-  def postChangeAllPage(url: String): HttpRequestBuilder = {
+  def postChangeAllPage(url: String): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -144,9 +145,13 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("value[2]", "businessDetails")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/change-registered-details/": String))
-  }
 
-  def postLitresPage(url: String, redirectUrl: String = "", highBand: String = "100", lowBand: String = "100"): HttpRequestBuilder = {
+  def postLitresPage(
+    url: String,
+    redirectUrl: String = "",
+    highBand: String = "100",
+    lowBand: String = "100"
+  ): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -154,35 +159,41 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("litres.highBand", highBand)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
-  }
 
-  def postLitresPageNxtPagePackagingSites(url: String, highBand: String = "100", lowBand: String = "100"): HttpRequestBuilder = {
+  def postLitresPageNxtPagePackagingSites(
+    url: String,
+    highBand: String = "100",
+    lowBand: String = "100"
+  ): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("litres.lowBand", lowBand)
       .formParam("litres.highBand", highBand)
       .check(status.is(303))
-      .check(header("Location").in(s"/$frontEndRoute/change-activity/packaging-site-details": String,
-        s"/$frontEndRoute/change-activity/pack-at-business-address": String))
+      .check(
+        header("Location").in(
+          s"/$frontEndRoute/change-activity/packaging-site-details": String,
+          s"/$frontEndRoute/change-activity/pack-at-business-address": String
+        )
+      )
       .check(header("Location").saveAs("updatePackagingSitesUrl"))
-  }
 
-  def getAddPackingSiteIfRequiredOrNoUpdateRequests: Seq[HttpRequestBuilder] = {
+  def getAddPackingSiteIfRequiredOrNoUpdateRequests: Seq[HttpRequestBuilder] =
     if (hasPackagingSites(s"#updatePackagingSitesUrl")) {
       Seq(
         getPage("change-activity/packaging-site-details"),
         postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details")
       )
-    } else Seq(
-      getPage("change-activity/pack-at-business-address"),
-      postPage("change-activity/pack-at-business-address", "true", "change-activity/packaging-site-details"),
-      getPage("change-activity/packaging-site-details"),
-      postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details")
-    )
-  }
+    } else
+      Seq(
+        getPage("change-activity/pack-at-business-address"),
+        postPage("change-activity/pack-at-business-address", "true", "change-activity/packaging-site-details"),
+        getPage("change-activity/packaging-site-details"),
+        postPage("change-activity/packaging-site-details", "false", "change-activity/secondary-warehouse-details")
+      )
 
-  def postContactDetailsAddPage(redirectUrl: String = ""): HttpRequestBuilder = {
+  def postContactDetailsAddPage(redirectUrl: String = ""): HttpRequestBuilder =
     http("POST change-registered-details/contact-details-add")
       .post(s"$baseFrontEndUrl/$frontEndRoute/change-registered-details/contact-details-add": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -192,9 +203,8 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("email", "example@sample.com")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/$redirectUrl": String))
-  }
 
-  def postCancelDatePage: HttpRequestBuilder = {
+  def postCancelDatePage: HttpRequestBuilder =
     http("POST cancel-registration/date")
       .post(s"$baseFrontEndUrl/$frontEndRoute/cancel-registration/date": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -203,9 +213,8 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("cancelRegistrationDate.year", (LocalDate.now().plusDays(2).getYear).toString)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/cancel-registration/check-your-answers": String))
-  }
 
-  def postAddSmallProducerPage: HttpRequestBuilder = {
+  def postAddSmallProducerPage: HttpRequestBuilder =
     http("POST add-small-producer")
       .post(s"$baseFrontEndUrl/$frontEndRoute/correct-return/add-small-producer": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -215,6 +224,5 @@ object SDILVariationsRequests extends ServicesConfiguration {
       .formParam("litres.highBand", "1000")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/correct-return/small-producer-details": String))
-  }
 
 }

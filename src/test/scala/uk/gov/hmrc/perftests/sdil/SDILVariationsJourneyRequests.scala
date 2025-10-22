@@ -28,11 +28,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
@@ -50,11 +48,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
@@ -75,11 +71,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "updateRegisteredDetails", "change-registered-details"),
@@ -90,7 +84,11 @@ trait SDILVariationsJourneyRequests {
     postPackagingSiteDetailsPage("change-registered-details/warehouse-details", "true"),
     getPage("change-registered-details/warehouse-details"),
     getPage("change-registered-details/warehouse-details/remove/0"),
-    postPage("change-registered-details/warehouse-details/remove/0", "true", "change-registered-details/warehouse-details"),
+    postPage(
+      "change-registered-details/warehouse-details/remove/0",
+      "true",
+      "change-registered-details/warehouse-details"
+    ),
     getPage("change-registered-details/warehouse-details"),
     postPage("change-registered-details/warehouse-details", "false", "change-registered-details/check-your-answers"),
     getPage("change-registered-details/check-your-answers"),
@@ -103,11 +101,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "changeActivity", "change-activity/amount-produced"),
@@ -138,11 +134,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "changeActivity", "change-activity/amount-produced"),
@@ -175,11 +169,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "changeActivity", "change-activity/amount-produced"),
@@ -201,11 +193,9 @@ trait SDILVariationsJourneyRequests {
 //    resetReturns,
 //    sdilReturnsCollectionReset,
 //    resetReturnsUserAnswers(),
-
     navigateToAuth,
     createVariationsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getPage("select-change"),
     postPage("select-change", "cancelRegistration", "cancel-registration/file-return-before-deregistration"),

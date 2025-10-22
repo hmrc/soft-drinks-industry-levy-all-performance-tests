@@ -34,7 +34,7 @@ sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all gatling:t
 Run full performance test (locally) as follows:
 
 ```bash
-sbt -DrunLocal=true gatling:test
+sbt -DrunLocal=true Gatling/test
 ```
 
 Run tests (Staging) from Jenkins here:

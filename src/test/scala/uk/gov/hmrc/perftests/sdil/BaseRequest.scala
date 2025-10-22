@@ -25,7 +25,7 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait BaseRequest extends ServicesConfiguration {
 
-  val SDILReturnsBaseUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
+  val SDILReturnsBaseUrl: String     = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
   val submitVatReturnBaseUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
 
   val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)""""
@@ -36,17 +36,14 @@ trait BaseRequest extends ServicesConfiguration {
   def saveCookie(): CheckBuilder[HttpHeaderRegexCheckType, Response] =
     headerRegex("Set-Cookie", "mdtp=(.*)").optional.saveAs("cookie")
 
-  def absoluteRedirectTransform(baseUrl: String): String => String = {
-    redirectUrl: String => {
-      if (redirectUrl.startsWith("/")) {
-        baseUrl + redirectUrl
-      } else {
-        redirectUrl
-      }
+  def absoluteRedirectTransform(baseUrl: String): String => String = { redirectUrl: String =>
+    if (redirectUrl.startsWith("/")) {
+      baseUrl + redirectUrl
+    } else {
+      redirectUrl
     }
   }
 
-  def hasPackagingSites(redirectUrl: String): Boolean = {
-      redirectUrl.endsWith("/packaging-site-details")
-  }
+  def hasPackagingSites(redirectUrl: String): Boolean =
+    redirectUrl.endsWith("/packaging-site-details")
 }

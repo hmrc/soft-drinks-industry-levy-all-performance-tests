@@ -29,15 +29,12 @@ trait SDILReturnJourneyRequests {
     resetReturns,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
-
     navigateToAuth,
     createReturnsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getAccountHomePageStartReturn1,
     getAccountHomePageStartReturn2,
-
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
@@ -68,7 +65,7 @@ trait SDILReturnJourneyRequests {
     postClaimCreditsForLostDamagedPage,
     getHowManyCreditsForLostDamagedPage,
     postHowManyCreditsForLostDamagedPage,
-    getCheckYourAnswersPage,
+    getCheckYourAnswersPage
 //    postCheckYourAnswersPage,
 //    getReturnSentPage
   )
@@ -78,15 +75,12 @@ trait SDILReturnJourneyRequests {
     resetReturns,
     sdilReturnsCollectionReset,
     resetReturnsUserAnswers(),
-
     navigateToAuth,
     createReturnsAuthSession,
     navigateToAuthSession,
-
     getAccountHomePage,
     getAccountHomePageStartReturn1,
     getAccountHomePageStartReturn2,
-
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
@@ -125,7 +119,7 @@ trait SDILReturnJourneyRequests {
     postProductionSiteDetailsPage,
     getSecondaryWarehouseDetailsPage,
     postSecondaryWarehouseDetailsPage,
-    getCheckYourAnswersPage,
+    getCheckYourAnswersPage
 //    postCheckYourAnswersPage,
 //    getReturnSentPage
   )
