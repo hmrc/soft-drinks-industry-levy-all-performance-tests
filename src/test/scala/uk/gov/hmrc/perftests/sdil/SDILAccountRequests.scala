@@ -24,55 +24,49 @@ import uk.gov.hmrc.perftests.sdil.AuthRequests.{absoluteRedirectTransform, saveC
 
 object SDILAccountRequests extends ServicesConfiguration {
 
-  val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
-  val accountFrontEndRoute: String   = "soft-drinks-industry-levy-account-frontend"
-  val baseReturnsFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
-  val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
-  val variationsFrontEndRoute: String   = "soft-drinks-industry-levy-variations-frontend"
+  val baseAccountFrontEndUrl: String  = baseUrlFor("soft-drinks-industry-levy-account-frontend")
+  val accountFrontEndRoute: String    = "soft-drinks-industry-levy-account-frontend"
+  val baseReturnsFrontEndUrl: String  = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
+  val returnsFrontEndRoute: String    = "soft-drinks-industry-levy-returns-frontend"
+  val variationsFrontEndRoute: String = "soft-drinks-industry-levy-variations-frontend"
 
-  def getAccountHomePage: HttpRequestBuilder = {
+  def getAccountHomePage: HttpRequestBuilder =
     http("GET account-home")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute": String)
       .check(status.is(200))
       .check(saveCsrfToken())
-  }
 
-  def getNextRequest: HttpRequestBuilder = {
+  def getNextRequest: HttpRequestBuilder =
     http("GET account-home")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/:isNilReturn": String)
       .check(status.is(200))
       .check(saveCsrfToken())
-  }
 
-  def postAccountHomePageStartReturn: HttpRequestBuilder = {
+  def postAccountHomePageStartReturn: HttpRequestBuilder =
     http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
-  }
 
-  def getAccountHomePageStartReturn1: HttpRequestBuilder = {
+  def getAccountHomePageStartReturn1: HttpRequestBuilder =
     http(s"GET account-home-start-return")
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
       .check(status.is(303))
       .check(saveCsrfToken())
       .check(header("Location").transform(absoluteRedirectTransform(baseReturnsFrontEndUrl)).saveAs("startReturnUrl"))
-  }
 
-  def getAccountHomePageStartReturn2: HttpRequestBuilder = {
+  def getAccountHomePageStartReturn2: HttpRequestBuilder =
     http(s"GET account-home-start-return-2")
       .get("#{startReturnUrl}")
       .check(status.is(303))
       .check(saveCsrfToken())
-  }
 
-  def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder = {
+  def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder =
     http(s"POST account-home")
       .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/make-a-change": String)
       //.formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
-  }
 
 }

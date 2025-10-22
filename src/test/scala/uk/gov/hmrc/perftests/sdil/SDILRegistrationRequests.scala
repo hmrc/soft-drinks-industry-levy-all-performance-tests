@@ -27,41 +27,37 @@ import java.time.LocalDate
 object SDILRegistrationRequests extends ServicesConfiguration {
 
   val baseFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-registration-frontend")
-  val frontEndRoute: String = "soft-drinks-industry-levy-registration"
+  val frontEndRoute: String   = "soft-drinks-industry-levy-registration"
 
-  def getPage(url: String): HttpRequestBuilder = {
+  def getPage(url: String): HttpRequestBuilder =
     http(s"GET $url")
       .get(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .check(status.is(200))
       .check(saveCsrfToken())
-  }
 
-  def getStartPage(redirectUrl: String = "/verify"): HttpRequestBuilder = {
+  def getStartPage(redirectUrl: String = "/verify"): HttpRequestBuilder =
     http(s"GET start")
       .get(s"$baseFrontEndUrl/$frontEndRoute/start": String)
       .check(status.is(303))
       .check(saveCsrfToken())
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
-  }
 
-  def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postFormlessPage(url: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
-  }
 
-  def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postPage(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .formParam("value", body)
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
-  }
 
-  def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postPageRedirectToAddressLookup(url: String, body: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -69,14 +65,12 @@ object SDILRegistrationRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
       .check(header("Location").saveAs("addressOffRampUrl"))
-  }
 
-  def getPackagingSiteNamePage: HttpRequestBuilder = {
+  def getPackagingSiteNamePage: HttpRequestBuilder =
     http(s"POST packaging-site-name")
       .get(s"$baseFrontEndUrl/$frontEndRoute/packaging-site-name": String)
       .check(status.is(303))
       .check(saveCsrfToken())
-  }
 
   def postPackagingSiteNamePage(redirectUrl: String = ""): HttpRequestBuilder = {
     println("here3")
@@ -88,15 +82,14 @@ object SDILRegistrationRequests extends ServicesConfiguration {
       .check(headerRegex("Location", s"(.*)$frontEndRoute/off-ramp$redirectUrl(.*)": String))
   }
 
-  def getAddressRampOffPage(redirectUrl: String): HttpRequestBuilder = {
+  def getAddressRampOffPage(redirectUrl: String): HttpRequestBuilder =
     http(s"GET #{addressOffRampUrl}")
       .get(s"#{addressOffRampUrl}": String)
       .check(status.is(303))
       .check(saveCsrfToken())
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
-  }
 
-  def postLitresPage(url: String, redirectUrl: String = ""): HttpRequestBuilder = {
+  def postLitresPage(url: String, redirectUrl: String = ""): HttpRequestBuilder =
     http(s"POST $url")
       .post(s"$baseFrontEndUrl/$frontEndRoute/$url": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -104,9 +97,8 @@ object SDILRegistrationRequests extends ServicesConfiguration {
       .formParam("highBand", "100")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
-  }
 
-  def postContactDetailsPage(redirectUrl: String = ""): HttpRequestBuilder = {
+  def postContactDetailsPage(redirectUrl: String = ""): HttpRequestBuilder =
     http("POST contact-details")
       .post(s"$baseFrontEndUrl/$frontEndRoute/contact-details": String)
       .formParam("csrfToken", s"#{csrfToken}")
@@ -116,13 +108,12 @@ object SDILRegistrationRequests extends ServicesConfiguration {
       .formParam("email", "example@sample.com")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
-  }
 
   def postStartDatePage(redirectUrl: String): HttpRequestBuilder = {
     val fourDaysAgo = LocalDate.now().minusDays(10)
-    val startDay = fourDaysAgo.getDayOfMonth.toString
-    val startMonth = fourDaysAgo.getMonthValue.toString
-    val startYear = fourDaysAgo.getYear.toString
+    val startDay    = fourDaysAgo.getDayOfMonth.toString
+    val startMonth  = fourDaysAgo.getMonthValue.toString
+    val startYear   = fourDaysAgo.getYear.toString
 
     http("POST start-date")
       .post(s"$baseFrontEndUrl/$frontEndRoute/start-date": String)
@@ -134,18 +125,16 @@ object SDILRegistrationRequests extends ServicesConfiguration {
       .check(header("Location").is(s"/$frontEndRoute$redirectUrl": String))
   }
 
-  def postCheckYourAnswersPage: HttpRequestBuilder = {
+  def postCheckYourAnswersPage: HttpRequestBuilder =
     http("POST check-your-anwers")
       .post(s"$baseFrontEndUrl/$frontEndRoute/check-your-answers": String)
       .formParam("csrfToken", s"#{csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(s"/$frontEndRoute/registration-confirmation": String))
-  }
 
-  def getRegisterConfirmationPage: HttpRequestBuilder = {
+  def getRegisterConfirmationPage: HttpRequestBuilder =
     http("GET return-sent")
       .get(s"$baseFrontEndUrl/$frontEndRoute/registration-confirmation": String)
       .check(saveCsrfToken())
       .check(status.is(200))
-  }
 }

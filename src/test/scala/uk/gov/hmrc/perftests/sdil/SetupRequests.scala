@@ -23,10 +23,10 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 object SetupRequests extends BaseRequest {
 
   val baseBackendUrl: String = baseUrlFor("soft-drinks-industry-levy")
-  val backendRoute: String = "/test-only"
+  val backendRoute: String   = "/test-only"
 
   val baseReturnsFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-returns-frontend")
-  val returnsFrontEndRoute: String = "soft-drinks-industry-levy-returns-frontend"
+  val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
 
   def resetAll: HttpRequestBuilder = {
     resetPending
@@ -36,29 +36,24 @@ object SetupRequests extends BaseRequest {
     resetReturnsUserAnswers()
   }
 
-  def resetPending: HttpRequestBuilder = {
+  def resetPending: HttpRequestBuilder =
     http("GET reset-pending")
       .get(s"$baseBackendUrl/$backendRoute/reset-pending": String)
-  }
 
-  def resetReturns: HttpRequestBuilder = {
+  def resetReturns: HttpRequestBuilder =
     http("GET reset-returns")
       .get(s"$baseBackendUrl/$backendRoute/reset-returns": String)
-  }
 
-  def resetRegistrations: HttpRequestBuilder = {
+  def resetRegistrations: HttpRequestBuilder =
     http("GET reset-registrations")
       .get(s"$baseBackendUrl/$backendRoute/reset-registrations": String)
-  }
 
-  def sdilReturnsCollectionReset: HttpRequestBuilder = {
+  def sdilReturnsCollectionReset: HttpRequestBuilder =
     http("GET sdilReturnsCollectionReset")
       .get(s"$baseBackendUrl/$backendRoute/sdilReturnsCollectionReset": String)
-  }
 
-  def resetReturnsUserAnswers(sdilRef: String = "#{SDILRef}"): HttpRequestBuilder = {
+  def resetReturnsUserAnswers(sdilRef: String = "#{SDILRef}"): HttpRequestBuilder =
     http(s"GET user-answers $sdilRef")
       .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/test-only/user-answers/$sdilRef": String)
-  }
 
 }
