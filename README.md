@@ -25,16 +25,16 @@ Do **NOT** run a full performance test against staging from your local machine. 
 Run smoke test (locally) as follows:
 
 ```bash
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=registrations gatling:test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns gatling:test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations gatling:test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all gatling:test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=registrations Gatling/test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns Gatling/test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations Gatling/test
+sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all Gatling/test
 ```
 
 Run full performance test (locally) as follows:
 
 ```bash
-sbt -DrunLocal=true Gatling/test
+sbt -Dperftest.runSmokeTest=false -DrunLocal=true -Dperftest.labels=all Gatling/test
 ```
 
 Run tests (Staging) from Jenkins here:
