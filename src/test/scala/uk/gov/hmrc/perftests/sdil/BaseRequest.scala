@@ -21,6 +21,8 @@ import io.gatling.core.check.CheckBuilder
 import io.gatling.core.check.regex.RegexCheckType
 import io.gatling.http.Predef._
 import io.gatling.http.check.header.HttpHeaderRegexCheckType
+import io.gatling.core.session.Expression
+import io.gatling.core.session.el.El
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait BaseRequest extends ServicesConfiguration {
@@ -30,13 +32,23 @@ trait BaseRequest extends ServicesConfiguration {
 
   val csrfPattern = """<input type="hidden" name="csrfToken" value="([^"]+)""""
 
+  protected def elStringExpr(value: String): Expression[String]        = value.el[String]
+  protected def elAnyExpr(value: String): Expression[Any]              = value.el[Any]
+  protected def elCharSeqExpr(value: String): Expression[CharSequence] = value.el[CharSequence]
+
+  protected val csrfTokenExpr: Expression[String]                 = session =>
+    session("csrfToken").asOption[String].getOrElse("")
+  protected val locationHeaderExpr: Expression[CharSequence]      = elCharSeqExpr("Location")
+  protected val setCookieHeaderExpr: Expression[CharSequence]     = elCharSeqExpr("Set-Cookie")
+  protected val redirectionUrlHeaderExpr: Expression[CharSequence] = elCharSeqExpr("RedirectionUrl")
+
   def saveCsrfToken(): CheckBuilder[RegexCheckType, String] =
     regex(_ => csrfPattern).optional.saveAs("csrfToken")
 
   def saveCookie(): CheckBuilder[HttpHeaderRegexCheckType, Response] =
-    headerRegex("Set-Cookie", "mdtp=(.*)").optional.saveAs("cookie")
+    headerRegex(setCookieHeaderExpr, elStringExpr("mdtp=(.*)")).optional.saveAs("cookie")
 
-  def absoluteRedirectTransform(baseUrl: String): String => String = { redirectUrl: String =>
+  def absoluteRedirectTransform(baseUrl: String): String => String = { (redirectUrl: String) =>
     if (redirectUrl.startsWith("/")) {
       baseUrl + redirectUrl
     } else {
