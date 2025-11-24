@@ -38,22 +38,22 @@ object SetupRequests extends BaseRequest {
 
   def resetPending: HttpRequestBuilder =
     http("GET reset-pending")
-      .get(s"$baseBackendUrl/$backendRoute/reset-pending": String)
+      .get(s"$baseBackendUrl/$backendRoute/reset-pending")
 
   def resetReturns: HttpRequestBuilder =
     http("GET reset-returns")
-      .get(s"$baseBackendUrl/$backendRoute/reset-returns": String)
+      .get(s"$baseBackendUrl/$backendRoute/reset-returns")
 
   def resetRegistrations: HttpRequestBuilder =
     http("GET reset-registrations")
-      .get(s"$baseBackendUrl/$backendRoute/reset-registrations": String)
+      .get(s"$baseBackendUrl/$backendRoute/reset-registrations")
 
   def sdilReturnsCollectionReset: HttpRequestBuilder =
     http("GET sdilReturnsCollectionReset")
-      .get(s"$baseBackendUrl/$backendRoute/sdilReturnsCollectionReset": String)
+      .get(s"$baseBackendUrl/$backendRoute/sdilReturnsCollectionReset")
 
   def resetReturnsUserAnswers(sdilRef: String = "#{SDILRef}"): HttpRequestBuilder =
     http(s"GET user-answers $sdilRef")
-      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/test-only/user-answers/$sdilRef": String)
+      .get(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/test-only/user-answers/$sdilRef")
 
 }

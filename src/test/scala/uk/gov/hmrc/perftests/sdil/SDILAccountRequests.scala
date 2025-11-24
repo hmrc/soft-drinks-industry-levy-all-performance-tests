@@ -19,10 +19,8 @@ package uk.gov.hmrc.perftests.sdil
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
-import uk.gov.hmrc.performance.conf.ServicesConfiguration
-import uk.gov.hmrc.perftests.sdil.AuthRequests.{absoluteRedirectTransform, saveCsrfToken}
 
-object SDILAccountRequests extends ServicesConfiguration {
+object SDILAccountRequests extends BaseRequest {
 
   val baseAccountFrontEndUrl: String  = baseUrlFor("soft-drinks-industry-levy-account-frontend")
   val accountFrontEndRoute: String    = "soft-drinks-industry-levy-account-frontend"
@@ -32,29 +30,29 @@ object SDILAccountRequests extends ServicesConfiguration {
 
   def getAccountHomePage: HttpRequestBuilder =
     http("GET account-home")
-      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute": String)
+      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute")
       .check(status.is(200))
       .check(saveCsrfToken())
 
   def getNextRequest: HttpRequestBuilder =
     http("GET account-home")
-      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/:isNilReturn": String)
+      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/:isNilReturn")
       .check(status.is(200))
       .check(saveCsrfToken())
 
   def postAccountHomePageStartReturn: HttpRequestBuilder =
     http(s"POST account-home")
-      .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return": String)
-      .formParam("csrfToken", s"#{csrfToken}")
+      .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return")
+      .formParam("csrfToken", csrfTokenExpr)
       .check(status.is(303))
-      .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
+      .check(header(locationHeaderExpr).is(elStringExpr(s"/$returnsFrontEndRoute/start-a-return")))
 
   def getAccountHomePageStartReturn1: HttpRequestBuilder =
     http(s"GET account-home-start-return")
-      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false": String)
+      .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false")
       .check(status.is(303))
       .check(saveCsrfToken())
-      .check(header("Location").transform(absoluteRedirectTransform(baseReturnsFrontEndUrl)).saveAs("startReturnUrl"))
+      .check(header(locationHeaderExpr).transform(absoluteRedirectTransform(baseReturnsFrontEndUrl)).saveAs("startReturnUrl"))
 
   def getAccountHomePageStartReturn2: HttpRequestBuilder =
     http(s"GET account-home-start-return-2")
@@ -64,9 +62,9 @@ object SDILAccountRequests extends ServicesConfiguration {
 
   def postAccountHomePageTellHMRCAboutAChange: HttpRequestBuilder =
     http(s"POST account-home")
-      .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/make-a-change": String)
-      //.formParam("csrfToken", s"#{csrfToken}")
+      .post(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/make-a-change")
+      //.formParam("csrfToken", csrfTokenExpr)
       .check(status.is(303))
-      .check(header("Location").is(s"/$returnsFrontEndRoute/start-a-return": String))
+      .check(header(locationHeaderExpr).is(elStringExpr(s"/$returnsFrontEndRoute/start-a-return")))
 
 }
