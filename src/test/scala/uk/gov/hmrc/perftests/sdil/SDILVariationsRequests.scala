@@ -217,7 +217,7 @@ object SDILVariationsRequests extends BaseRequest {
       .post(s"$baseFrontEndUrl/$frontEndRoute/correct-return/add-small-producer")
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("producerName", elAnyExpr("Fake Producer"))
-      .formParam("referenceNumber", elAnyExpr("XZSDIL000000234"))
+      .formParam("referenceNumber", elAnyExpr("XWSDIL000000341"))
       .formParam("litres.lowBand", elAnyExpr("1000"))
       .formParam("litres.highBand", elAnyExpr("1000"))
       .check(status.is(303))
