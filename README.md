@@ -25,16 +25,16 @@ Do **NOT** run a full performance test against staging from your local machine. 
 Run smoke test (locally) as follows:
 
 ```bash
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=registrations Gatling/test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=returns Gatling/test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=variations Gatling/test
-sbt -Dperftest.runSmokeTest=true -DrunLocal=true -Dperftest.labels=all Gatling/test
+sbt -Dperftest.runSmokeTest=true -Dconfig.resource=application.local.conf -DrunLocal=true -Dperftest.labels=registrations Gatling/test
+sbt -Dperftest.runSmokeTest=true -Dconfig.resource=application.local.conf -DrunLocal=true -Dperftest.labels=returns Gatling/test
+sbt -Dperftest.runSmokeTest=true -Dconfig.resource=application.local.conf -DrunLocal=true -Dperftest.labels=variations Gatling/test
+sbt -Dperftest.runSmokeTest=true -Dconfig.resource=application.local.conf -DrunLocal=true -Dperftest.labels=all Gatling/test
 ```
 
 Run full performance test (locally) as follows:
 
 ```bash
-sbt -Dperftest.runSmokeTest=false -DrunLocal=true -Dperftest.labels=all Gatling/test
+sbt -Dperftest.runSmokeTest=false -Dconfig.resource=application.local.conf -DrunLocal=true -Dperftest.labels=all Gatling/test
 ```
 
 Run tests (Staging) from Jenkins here:
@@ -68,6 +68,14 @@ Format all project files as follows:
 ```bash
 sbt scalafmtAll
 ```
+
+* application.conf: Default configuration for Jenkins/staging runs
+    * Uses production load (10%)
+    * Prevents overwhelming shared staging environment during CI performance tests
+* application.local.conf: Configuration for local development runs
+    * Uses production load with 2x buffer (20%)
+    * Provides confidence that application can handle peak load scenarios
+    * Automatically used when running tests locally
 
 ## License
 
