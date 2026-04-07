@@ -117,7 +117,7 @@ object SDILReturnsRequests extends BaseRequest {
       .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/add-small-producer")
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("producerName", elAnyExpr("Fake Producer"))
-      .formParam("referenceNumber", elAnyExpr("XWSDIL000000341"))
+      .formParam("referenceNumber", elAnyExpr("XASDIL000000431"))
       .formParam("lowBand", elAnyExpr("1000"))
       .formParam("highBand", elAnyExpr("1000"))
       .check(status.is(303))
