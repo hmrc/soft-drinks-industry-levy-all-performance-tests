@@ -37,6 +37,9 @@ object SDILReturnsRequests extends BaseRequest {
     "XTSDIL000000021",
     "XYSDIL000000081",
     "XZSDIL000000111",
+    "XASDIL000000431",
+    "XHSDIL000000921",
+    "XPSDIL000000161",
     "XWSDIL000000341"
   )
 
