@@ -30,7 +30,6 @@ object SDILReturnsRequests extends BaseRequest {
   val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
   val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
   val accountFrontEndRoute: String   = "soft-drinks-industry-levy-account-frontend"
-  private val runLocal: Boolean      = java.lang.Boolean.getBoolean("runLocal")
   private lazy val baseStubUrl: String = baseUrlFor("soft-drinks-industry-levy-stub")
 
   val smallProducerCandidates: Seq[String] = Seq(
@@ -158,7 +157,7 @@ object SDILReturnsRequests extends BaseRequest {
       .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/add-small-producer")
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("producerName", elAnyExpr("Fake Producer"))
-      .formParam("referenceNumber", if (runLocal) smallProducerReferenceExpr else elAnyExpr("XWSDIL000000341"))
+      .formParam("referenceNumber", smallProducerReferenceExpr)
       .formParam("lowBand", elAnyExpr("1000"))
       .formParam("highBand", elAnyExpr("1000"))
       .check(status.is(303))

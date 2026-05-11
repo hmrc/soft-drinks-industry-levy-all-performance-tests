@@ -24,14 +24,10 @@ import uk.gov.hmrc.perftests.sdil.SetupRequests._
 
 trait SDILReturnJourneyRequests {
 
-  private val runLocal: Boolean = java.lang.Boolean.getBoolean("runLocal")
-
-  private val localSmallProducerCandidateRequests: Seq[HttpRequestBuilder] =
-    if (runLocal) {
-      smallProducerCandidates.zipWithIndex.map { case (sdilRef, index) =>
-        getSmallProducerCandidatePage(sdilRef, index)
-      }
-    } else Seq.empty
+  private val smallProducerCandidateRequests: Seq[HttpRequestBuilder] =
+    smallProducerCandidates.zipWithIndex.map { case (sdilRef, index) =>
+      getSmallProducerCandidatePage(sdilRef, index)
+    }
 
   val sdilReturnJourney1Requests: Seq[HttpRequestBuilder] = Seq(
     resetPending,
@@ -45,7 +41,7 @@ trait SDILReturnJourneyRequests {
     getAccountHomePage,
     getAccountHomePageStartReturn1,
     getAccountHomePageStartReturn2
-  ) ++ localSmallProducerCandidateRequests ++ Seq(
+  ) ++ smallProducerCandidateRequests ++ Seq(
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
@@ -93,7 +89,7 @@ trait SDILReturnJourneyRequests {
     getAccountHomePage,
     getAccountHomePageStartReturn1,
     getAccountHomePageStartReturn2
-  ) ++ localSmallProducerCandidateRequests ++ Seq(
+  ) ++ smallProducerCandidateRequests ++ Seq(
     getOwnBrandsPackagedAtOwnSitesPage,
     postOwnBrandsPackagedAtOwnSitesPage,
     getHowManyOwnBrandsPackagedAtOwnSitesPage,
