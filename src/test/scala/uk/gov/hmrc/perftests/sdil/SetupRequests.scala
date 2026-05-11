@@ -44,6 +44,10 @@ object SetupRequests extends BaseRequest {
     http("GET reset-returns")
       .get(s"$baseBackendUrl/$backendRoute/reset-returns")
 
+  def resetSubscriptions: HttpRequestBuilder =
+    http("GET reset-subscriptions")
+      .get(s"$baseBackendUrl/$backendRoute/reset-subscriptions")
+
   def resetRegistrations: HttpRequestBuilder =
     http("GET reset-registrations")
       .get(s"$baseBackendUrl/$backendRoute/reset-registrations")

@@ -52,6 +52,8 @@ object SDILAccountRequests extends BaseRequest {
       .get(s"$baseAccountFrontEndUrl/$accountFrontEndRoute/start-a-return/nilReturn/false")
       .check(status.is(303))
       .check(saveCsrfToken())
+      .check(headerRegex(locationHeaderExpr, """.*/year/([0-9]{4})/quarter/[0-3]/nil-return/false""").saveAs("returnYear"))
+      .check(headerRegex(locationHeaderExpr, """.*/year/[0-9]{4}/quarter/([0-3])/nil-return/false""").saveAs("returnQuarter"))
       .check(header(locationHeaderExpr).transform(absoluteRedirectTransform(baseReturnsFrontEndUrl)).saveAs("startReturnUrl"))
 
   def getAccountHomePageStartReturn2: HttpRequestBuilder =

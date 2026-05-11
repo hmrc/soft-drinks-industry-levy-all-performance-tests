@@ -17,8 +17,12 @@
 package uk.gov.hmrc.perftests.sdil
 
 import io.gatling.core.Predef._
+import io.gatling.commons.validation.SuccessWrapper
+import io.gatling.core.session.{Expression, Session}
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
+
+import java.time.LocalDate
 
 object SDILReturnsRequests extends BaseRequest {
 
@@ -26,6 +30,43 @@ object SDILReturnsRequests extends BaseRequest {
   val returnsFrontEndRoute: String   = "soft-drinks-industry-levy-returns-frontend"
   val baseAccountFrontEndUrl: String = baseUrlFor("soft-drinks-industry-levy-account-frontend")
   val accountFrontEndRoute: String   = "soft-drinks-industry-levy-account-frontend"
+  private val runLocal: Boolean      = java.lang.Boolean.getBoolean("runLocal")
+  private lazy val baseStubUrl: String = baseUrlFor("soft-drinks-industry-levy-stub")
+
+  val smallProducerCandidates: Seq[String] = Seq(
+    "XQSDIL000000011",
+    "XTSDIL000000021",
+    "XYSDIL000000081",
+    "XZSDIL000000111",
+    "XWSDIL000000341"
+  )
+
+  private def candidateDateKey(index: Int): String = s"smallProducerCandidateDate$index"
+
+  private def returnPeriodEnd(year: Int, quarter: Int): LocalDate =
+    if (quarter == 3) LocalDate.of(year + 1, 1, 1).minusDays(1)
+    else LocalDate.of(year, quarter * 3 + 4, 1).minusDays(1)
+
+  private val smallProducerReferenceExpr: Expression[Any] = (session: Session) => {
+    val fallbackRef = smallProducerCandidates.last
+    val year        = session("returnYear").as[String].toInt
+    val quarter     = session("returnQuarter").as[String].toInt
+    val periodEnd   = returnPeriodEnd(year, quarter)
+
+    val validRef = smallProducerCandidates.zipWithIndex.collectFirst {
+      case (ref, index) if LocalDate.parse(session(candidateDateKey(index)).as[String]).isBefore(periodEnd) => ref
+    }
+
+    validRef.getOrElse(fallbackRef).success
+  }
+
+  def getSmallProducerCandidatePage(sdilRef: String, index: Int): HttpRequestBuilder =
+    http(s"GET small-producer-candidate-$sdilRef")
+      .get(s"$baseStubUrl/soft-drinks/subscription/details/sdil/$sdilRef")
+      .header("Authorization", "Bearer test")
+      .header("Environment", "live")
+      .check(status.is(200))
+      .check(jsonPath("$.subscriptionDetails.taxObligationStartDate").saveAs(candidateDateKey(index)))
 
   def redirectToBrandsPackagedAtOwnSitesPage: HttpRequestBuilder =
     http("REDIRECT to returns from accounts")
@@ -117,7 +158,7 @@ object SDILReturnsRequests extends BaseRequest {
       .post(s"$baseReturnsFrontEndUrl/$returnsFrontEndRoute/add-small-producer")
       .formParam("csrfToken", csrfTokenExpr)
       .formParam("producerName", elAnyExpr("Fake Producer"))
-      .formParam("referenceNumber", elAnyExpr("XASDIL000000431"))
+      .formParam("referenceNumber", if (runLocal) smallProducerReferenceExpr else elAnyExpr("XWSDIL000000341"))
       .formParam("lowBand", elAnyExpr("1000"))
       .formParam("highBand", elAnyExpr("1000"))
       .check(status.is(303))
